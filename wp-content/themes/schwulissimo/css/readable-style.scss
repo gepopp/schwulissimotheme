@@ -8204,3 +8204,13 @@ header
   max-height: 15px;
   width: auto;
 }
+
+/*---------------------
+Acf Form
+----------------------*/
+input[type="submit"].acf-button {
+  margin: 10px;
+  font-size: 1.5em;
+  background: none;
+  box-shadow: none;
+}

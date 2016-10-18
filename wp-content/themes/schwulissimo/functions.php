@@ -116,6 +116,18 @@ function schwulissimo_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'schwulissimo_scripts' );
 
+/*
+ * require administration section scripts
+ */
+add_action( 'init', 'schwulissimo_require_scripts');
+function schwulissimo_require_scripts() {
+
+        $files = glob(get_template_directory() . '/administration-shortcodes/*'); // get all file names
+        foreach ($files as $file) { // iterate files
+            if (is_file($file))
+                require_once $file; // delete file
+        }
+} 
 /**
  * Implement the Custom Header feature.
  */

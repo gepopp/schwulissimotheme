@@ -10,7 +10,9 @@
  */
         if(file_exists(  get_template_directory() .  '/wp_bootstrap_navwalker.php')){
             require_once  get_template_directory() . '/wp_bootstrap_navwalker.php';
-    }
+        }
+        acf_form_head();
+        
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
