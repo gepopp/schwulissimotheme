@@ -8,8 +8,8 @@
  *
  * @package schwulissimp
  */
-    if(file_exists('wp_bootstrap_navwalker.php')){
-        require_once 'wp_bootstrap_navwalker.php';
+        if(file_exists(  get_template_directory() .  '/wp_bootstrap_navwalker.php')){
+            require_once  get_template_directory() . '/wp_bootstrap_navwalker.php';
     }
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -22,11 +22,11 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="site container">
+<div id="administration-page" class="site">
 	
     
         <nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
+  <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#administration-menu">
@@ -36,7 +36,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="<?php echo home_url(); ?>">
-                <?php bloginfo('name'); ?>
+          <img src="<?php echo( get_header_image() ); ?>" alt="<?php echo( get_bloginfo( 'title' ) ); ?>" width="250" height="63" />
             </a>
     </div>
 
