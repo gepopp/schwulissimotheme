@@ -70,7 +70,7 @@ module.exports = function (grunt) {
         chokidar: {
             scripts: {
                 files: ['**/*.scss', '**/*.js'],
-                tasks: ['sass', 'autoprefixer', 'uglify', 'ftpPut'],
+                tasks: ['sass', 'autoprefixer', 'uglify'],
                 options: {
                     spawn: false,
                 }
