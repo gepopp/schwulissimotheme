@@ -13,16 +13,18 @@ input[type="time"],
 input[type="datetime"],
 input[type="datetime-local"],
 input[type="color"],
-textarea {
+textarea, select
+{
 	color: $color__text-input;
 	border: 1px solid $color__border-input;
-	border-radius: 3px;
 	padding: 3px;
-
-	&:focus {
+        min-width:100%;
+        width:100%;
+        &:focus {
 		color: $color__text-input-focus;
 	}
 }
+
 
 select {
 	border: 1px solid $color__border-input;
@@ -30,4 +32,16 @@ select {
 
 textarea {
 	width: 100%;
+}
+.wpcf7-form label{
+    width: 100%;
+}
+input[type="submit"], nput[type="submit"]:hover, nput[type="submit"]:active{
+    border-radius: 0;
+    border:none;
+    background: black;
+    color: white;
+    box-shadow: none !important;
+    font-size: 14px;
+    padding: 10px;
 }

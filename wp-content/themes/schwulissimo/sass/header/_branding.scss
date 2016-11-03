@@ -1,0 +1,92 @@
+#masthead{
+    margin-top: 20px;
+}
+.navbar{
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Oswald', sans-serif;
+}
+.site-branding{
+    border-bottom: 3px solid #E73C39;
+    padding-bottom: 20px;
+    
+    #site-search{
+        position: relative;
+        padding: 15px 0;
+    }
+    .search-field{
+        width:220px;
+        height: 30px;
+    }
+    .search-submit{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+    background: none;
+    box-shadow: none;
+    border: none;
+    margin-right: 5px;
+    color: #e73c30;
+    font-weight: bolder;
+    margin-top: 15px;
+    }
+    .navbar-toggle{
+        border:none;
+        box-shadow: none;
+        margin: 0;
+        .icon-bar{
+            background: black;
+            font-weight: bold;
+        }
+    }
+}
+.navbar-toggle{
+        border:none;
+        box-shadow: none;
+       
+        .icon-bar{
+            background: black;
+            font-weight: bold;
+        }
+    }
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media screen and (max-width: 768px){
+    
+    .brand-hide{
+        display: none;
+    }
+    
+    .container-header{
+        border-bottom: 1px solid black;
+    }
+    
+    .site-branding{ 
+        border: none;
+        
+        img{
+        max-width: 80%;
+        }
+    }
+    
+}
+.nav>li>a:hover, .nav>li>a:focus {
+    text-decoration: none;
+    background-color: white;
+}
+@media screen and (min-width: 768px){
+ 
+    .navbar .container-fluid{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .collapse{
+        padding-left: 0;
+    }
+}

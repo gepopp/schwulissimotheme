@@ -10,8 +10,8 @@
 
 .navbar {
   position: relative;
-  min-height: $navbar-height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
-  margin-bottom: $navbar-margin-bottom;
+  //min-height: $navbar-height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
+  //margin-bottom: $navbar-margin-bottom;
   border: 1px solid transparent;
 
   // Prevent floats from breaking the navbar
@@ -198,7 +198,7 @@
   @include navbar-vertical-align(34px);
   background-color: transparent;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  border: 1px solid transparent;
+  //border: 1px solid transparent;
   border-radius: $border-radius-base;
 
   // We remove the `outline` here, but later compensate by attaching `:hover`
@@ -210,12 +210,12 @@
   // Bars
   .icon-bar {
     display: block;
-    width: 22px;
-    height: 2px;
+    width: 25px;
+    height: 3px;
     border-radius: 1px;
   }
   .icon-bar + .icon-bar {
-    margin-top: 4px;
+    margin-top: 3px;
   }
 
   @media (min-width: $grid-float-breakpoint) {
@@ -395,15 +395,15 @@
 
 // Default navbar
 .navbar-default {
-  background-color: $navbar-default-bg;
-  border-color: $navbar-default-border;
+  //background-color: $navbar-default-bg;
+  //border-color: $navbar-default-border;
 
   .navbar-brand {
     color: $navbar-default-brand-color;
     &:hover,
     &:focus {
       color: $navbar-default-brand-hover-color;
-      background-color: $navbar-default-brand-hover-bg;
+      //background-color: $navbar-default-brand-hover-bg;
     }
   }
 
@@ -418,7 +418,7 @@
       &:hover,
       &:focus {
         color: $navbar-default-link-hover-color;
-        background-color: $navbar-default-link-hover-bg;
+       // background-color: $navbar-default-link-hover-bg;
       }
     }
     > .active > a {
@@ -426,7 +426,7 @@
       &:hover,
       &:focus {
         color: $navbar-default-link-active-color;
-        background-color: $navbar-default-link-active-bg;
+       // background-color: $navbar-default-link-active-bg;
       }
     }
     > .disabled > a {
@@ -434,7 +434,7 @@
       &:hover,
       &:focus {
         color: $navbar-default-link-disabled-color;
-        background-color: $navbar-default-link-disabled-bg;
+        //background-color: $navbar-default-link-disabled-bg;
       }
     }
   }

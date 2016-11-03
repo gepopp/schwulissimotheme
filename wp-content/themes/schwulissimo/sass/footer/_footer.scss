@@ -1,0 +1,66 @@
+.footer-container{
+    margin-top: 80px;   
+    padding-top: 20px;
+    padding-bottom: 40px;
+    border-top: 1px solid #eee;
+    text-transform: uppercase;
+    .grey-spacer{
+        margin-left: -15px; 
+        margin-right: 10px;
+        display: inline-block;
+    }
+    h5{
+        font-size: 18px;
+        display: inline-block;
+        padding-top: 20px;
+    }
+    ul{
+        list-style: none;
+        padding:0;
+        margin:0;
+    }
+    .col-md-2:nth-child(1) ul{
+        padding-left: 62px;
+        @media screen and (max-width: 767px){
+            padding-left: 0;
+        }
+    }
+    a, a:active, a:hover, a:visited{
+        color: #999;
+        font-size: 13px;
+    }
+}
+.footer-col-one-content{
+    padding-left: 15px;
+
+}
+#menu-folge-uns li{
+    display: inline-block;
+}
+a[href^="https://www.facebook"]{
+    background: url('img/facebook.svg') top left no-repeat;
+    background-size: contain;
+    width: 15px;
+    height:15px;
+    text-indent: -9999px;
+    display: inline-block;
+    margin-right: 25px;
+}
+a[href^="https://www.twitter"]{
+    background: url('img/twitter.svg') top left no-repeat;
+    background-size: contain;
+    width: 15px;
+    height:15px;
+    text-indent: -9999px;
+    display: inline-block;
+    margin-right: 25px;
+}
+a[href*="feed"]{
+    background: url('img/rss-symbol.svg') top left no-repeat;
+    background-size: contain;
+    width: 15px;
+    height:15px;
+    text-indent: -9999px;
+    display: inline-block;
+    margin-right: 25px;
+}

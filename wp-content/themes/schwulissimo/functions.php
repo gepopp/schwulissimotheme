@@ -104,9 +104,11 @@ add_action( 'widgets_init', 'schwulissimo_widgets_init' );
  * Enqueue scripts and styles.
  */
 function schwulissimo_scripts() {
+        wp_enqueue_style( 'oswald-font', 'https://fonts.googleapis.com/css?family=Oswald' );
 	wp_enqueue_style( 'schwulissimo-style', get_stylesheet_uri() );
+	
 
-	wp_enqueue_script( 'schwulissimo-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	wp_enqueue_script( 'schwulissimo-navigation', get_template_directory_uri() . '/js/main.min.js', array('jquery'), '20151215', true );
 
 	wp_enqueue_script( 'schwulissimo-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
@@ -152,3 +154,58 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+/**
+ * Load option Pages
+ */
+require get_template_directory() . '/inc/optionPages.php';
+/**
+ * Load Importer
+ */
+require get_template_directory() . '/inc/importer.php';
+/**
+ * Load helpers
+ */
+require get_template_directory() . '/inc/helper-functions.php';
+/**
+ * Load ct
+ */
+require get_template_directory() . '/inc/custom-taxonomy.php';
+/**
+ * Load cpt 
+ */
+require get_template_directory() . '/inc/cpt-veranstaltung.php';
+require get_template_directory() . '/inc/cpt-cityguide.php';
+
+add_filter('get_search_form', function($html){
+    
+$form = 
+<<<EOT
+    <form role="search" method="get" class="search-form" action="http://www.sewemo.eu/schwulissimo/">
+				<label>
+					<span class="screen-reader-text">Suche nach:</span>
+					<input type="search" class="search-field" placeholder="" value="" name="s">
+				</label>
+				<button type="submit"  class="search-submit" value=""><span class="glyphicon glyphicon-search"></span></button>
+			</form>
+EOT;
+return $form;
+    
+});
+
+//add_action('add_over_header', function(){   echo '<div class="container">';   echo '<img src="http://placehold.it/1140x300">';  echo '</div>'; });
+//add_action('add_under_header', function(){  echo '<img src="http://placehold.it/1140x300">'; });
+
+
+
+add_action( 'init', function() {
+  register_nav_menus(
+    array(
+      'footer-col-one' => __( 'Footer Column One' ),
+      'footer-col-two' => __( 'Footer Column Two' ),
+      'footer-col-three' => __( 'Footer Column Three' ),
+      'footer-col-four' => __( 'Footer Column Four' ),
+      'footer-col-five' => __( 'Footer Column Five' ),
+      'footer-col-six' => __( 'Footer Column Six' ),
+    )
+  );
+} );

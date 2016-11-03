@@ -44,6 +44,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 	## Galleries
 
 # Administration Section
+# Footer
 
 --------------------------------------------------------------*/
 @import "variables-site/variables-site";
@@ -117,3 +118,15 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 # Administration Section
 --------------------------------------------------------------*/
 @import "administration/administration";
+/*--------------------------------------------------------------
+# Branding
+--------------------------------------------------------------*/
+@import "header/branding";
+/*--------------------------------------------------------------
+# layout Elements
+--------------------------------------------------------------*/
+@import "layoutElements";
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+@import "footer/footer";

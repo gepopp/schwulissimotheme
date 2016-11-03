@@ -16,7 +16,9 @@
                 'post_type' => 'post',
                 'post_status' => 'publish'
             ),
-            'submit_value' => 'Create'
+            'label_placement' => 'left',
+            'title_label' => 'Beitragstitle',
+            'submit_value' => 'speichern'
         ));
 
         $content = ob_get_clean();

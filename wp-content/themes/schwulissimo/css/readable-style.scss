@@ -44,6 +44,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 	## Galleries
 
 # Administration Section
+# Footer
 
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
@@ -574,8 +575,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot");
-  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+  src: url("fonts/bootstrap/glyphicons-halflings-regular.eot");
+  src: url("fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
 }
 .glyphicon {
   position: relative;
@@ -2218,7 +2219,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    width: 1033px;
   }
 }
 
@@ -4353,7 +4354,7 @@ tbody.collapse.in {
 }
 
 .dropdown-menu > .disabled > a, .dropdown-menu > .disabled > a:hover, .dropdown-menu > .disabled > a:focus {
-  color: #777777;
+  color: transparent;
 }
 .dropdown-menu > .disabled > a:hover, .dropdown-menu > .disabled > a:focus {
   text-decoration: none;
@@ -4917,8 +4918,6 @@ tbody.collapse.in {
 
 .navbar {
   position: relative;
-  min-height: 50px;
-  margin-bottom: 20px;
   border: 1px solid transparent;
 }
 .navbar:before, .navbar:after {
@@ -5077,7 +5076,6 @@ tbody.collapse.in {
   margin-bottom: 8px;
   background-color: transparent;
   background-image: none;
-  border: 1px solid transparent;
   border-radius: 0;
 }
 .navbar-toggle:focus {
@@ -5085,12 +5083,12 @@ tbody.collapse.in {
 }
 .navbar-toggle .icon-bar {
   display: block;
-  width: 22px;
-  height: 2px;
+  width: 25px;
+  height: 3px;
   border-radius: 1px;
 }
 .navbar-toggle .icon-bar + .icon-bar {
-  margin-top: 4px;
+  margin-top: 3px;
 }
 @media (min-width: 768px) {
   .navbar-toggle {
@@ -5275,16 +5273,11 @@ tbody.collapse.in {
     margin-right: 0;
   }
 }
-.navbar-default {
-  background-color: #f8f8f8;
-  border-color: #e7e7e7;
-}
 .navbar-default .navbar-brand {
   color: #777;
 }
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
   color: #5e5e5e;
-  background-color: transparent;
 }
 .navbar-default .navbar-text {
   color: #777;
@@ -5294,15 +5287,12 @@ tbody.collapse.in {
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
   color: #333;
-  background-color: transparent;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-  color: #555;
-  background-color: #e7e7e7;
+  color: #E73C39;
 }
 .navbar-default .navbar-nav > .disabled > a, .navbar-default .navbar-nav > .disabled > a:hover, .navbar-default .navbar-nav > .disabled > a:focus {
   color: #ccc;
-  background-color: transparent;
 }
 .navbar-default .navbar-toggle {
   border-color: #ddd;
@@ -5319,7 +5309,7 @@ tbody.collapse.in {
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
   background-color: #e7e7e7;
-  color: #555;
+  color: #E73C39;
 }
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
@@ -5330,7 +5320,7 @@ tbody.collapse.in {
     background-color: transparent;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #555;
+    color: #E73C39;
     background-color: #e7e7e7;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {
@@ -7607,7 +7597,7 @@ input,
 select,
 textarea {
   color: #404040;
-  font-family: sans-serif;
+  font-family: Oswald, sans-serif;
   font-size: 16px;
   font-size: 1rem;
   line-height: 1.5;
@@ -7615,6 +7605,7 @@ textarea {
 
 h1, h2, h3, h4, h5, h6 {
   clear: both;
+  font-family: Oswald, sans-serif;
 }
 
 p {
@@ -7752,7 +7743,6 @@ input[type="submit"] {
   border-color: #ccc #ccc #bbb;
   border-radius: 3px;
   background: #e6e6e6;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 15px 17px rgba(255, 255, 255, 0.5), inset 0 -5px 12px rgba(0, 0, 0, 0.05);
   color: rgba(0, 0, 0, 0.8);
   font-size: 12px;
   font-size: 0.75rem;
@@ -7793,11 +7783,12 @@ input[type="time"],
 input[type="datetime"],
 input[type="datetime-local"],
 input[type="color"],
-textarea {
+textarea, select {
   color: #666;
   border: 1px solid #ccc;
-  border-radius: 3px;
   padding: 3px;
+  min-width: 100%;
+  width: 100%;
 }
 input[type="text"]:focus,
 input[type="email"]:focus,
@@ -7814,7 +7805,7 @@ input[type="time"]:focus,
 input[type="datetime"]:focus,
 input[type="datetime-local"]:focus,
 input[type="color"]:focus,
-textarea:focus {
+textarea:focus, select:focus {
   color: #111;
 }
 
@@ -7824,6 +7815,20 @@ select {
 
 textarea {
   width: 100%;
+}
+
+.wpcf7-form label {
+  width: 100%;
+}
+
+input[type="submit"], nput[type="submit"]:hover, nput[type="submit"]:active {
+  border-radius: 0;
+  border: none;
+  background: black;
+  color: white;
+  box-shadow: none !important;
+  font-size: 14px;
+  padding: 10px;
 }
 
 /*--------------------------------------------------------------
@@ -8200,6 +8205,12 @@ object {
 /*---------------------
 header
 ----------------------*/
+#administration-page .navbar {
+  margin-bottom: 0;
+}
+#administration-page .col-xs-12 {
+  padding-left: 0;
+}
 #administration-page .navbar-brand img {
   max-height: 15px;
   width: auto;
@@ -8213,4 +8224,184 @@ input[type="submit"].acf-button {
   font-size: 1.5em;
   background: none;
   box-shadow: none;
+}
+
+/*--------------------------------------------------------------
+# Branding
+--------------------------------------------------------------*/
+#masthead {
+  margin-top: 20px;
+}
+
+.navbar {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Oswald', sans-serif;
+}
+
+.site-branding {
+  border-bottom: 3px solid #E73C39;
+  padding-bottom: 20px;
+}
+.site-branding #site-search {
+  position: relative;
+  padding: 15px 0;
+}
+.site-branding .search-field {
+  width: 220px;
+  height: 30px;
+}
+.site-branding .search-submit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  font-size: 10px;
+  background: none;
+  box-shadow: none;
+  border: none;
+  margin-right: 5px;
+  color: #e73c30;
+  font-weight: bolder;
+  margin-top: 15px;
+}
+.site-branding .navbar-toggle {
+  border: none;
+  box-shadow: none;
+  margin: 0;
+}
+.site-branding .navbar-toggle .icon-bar {
+  background: black;
+  font-weight: bold;
+}
+
+.navbar-toggle {
+  border: none;
+  box-shadow: none;
+}
+.navbar-toggle .icon-bar {
+  background: black;
+  font-weight: bold;
+}
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+/* Small devices (tablets, 768px and up) */
+@media screen and (max-width: 768px) {
+  .brand-hide {
+    display: none;
+  }
+
+  .container-header {
+    border-bottom: 1px solid black;
+  }
+
+  .site-branding {
+    border: none;
+  }
+  .site-branding img {
+    max-width: 80%;
+  }
+}
+.nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
+  background-color: white;
+}
+
+@media screen and (min-width: 768px) {
+  .navbar .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .collapse {
+    padding-left: 0;
+  }
+}
+/*--------------------------------------------------------------
+# layout Elements
+--------------------------------------------------------------*/
+.grey-spacer {
+  background-color: #eee;
+  width: 65px;
+  height: 15px;
+  margin-top: 3px;
+}
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+.footer-container {
+  margin-top: 80px;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  border-top: 1px solid #eee;
+  text-transform: uppercase;
+}
+.footer-container .grey-spacer {
+  margin-left: -15px;
+  margin-right: 10px;
+  display: inline-block;
+}
+.footer-container h5 {
+  font-size: 18px;
+  display: inline-block;
+  padding-top: 20px;
+}
+.footer-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-container .col-md-2:nth-child(1) ul {
+  padding-left: 62px;
+}
+@media screen and (max-width: 767px) {
+  .footer-container .col-md-2:nth-child(1) ul {
+    padding-left: 0;
+  }
+}
+.footer-container a, .footer-container a:active, .footer-container a:hover, .footer-container a:visited {
+  color: #999;
+  font-size: 13px;
+}
+
+.footer-col-one-content {
+  padding-left: 15px;
+}
+
+#menu-folge-uns li {
+  display: inline-block;
+}
+
+a[href^="https://www.facebook"] {
+  background: url("img/facebook.svg") top left no-repeat;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  text-indent: -9999px;
+  display: inline-block;
+  margin-right: 25px;
+}
+
+a[href^="https://www.twitter"] {
+  background: url("img/twitter.svg") top left no-repeat;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  text-indent: -9999px;
+  display: inline-block;
+  margin-right: 25px;
+}
+
+a[href*="feed"] {
+  background: url("img/rss-symbol.svg") top left no-repeat;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  text-indent: -9999px;
+  display: inline-block;
+  margin-right: 25px;
 }
