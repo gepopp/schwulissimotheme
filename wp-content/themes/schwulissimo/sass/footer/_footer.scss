@@ -19,6 +19,10 @@
         padding:0;
         margin:0;
     }
+    li{
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     .col-md-2:nth-child(1) ul{
         padding-left: 62px;
         @media screen and (max-width: 767px){
@@ -57,6 +61,34 @@ a[href^="https://www.twitter"]{
 }
 a[href*="feed"]{
     background: url('img/rss-symbol.svg') top left no-repeat;
+    background-size: contain;
+    width: 15px;
+    height:15px;
+    text-indent: -9999px;
+    display: inline-block;
+    margin-right: 25px;
+}
+
+a[href*="whatsapp"]{
+    background: url('img/whatsapp.svg') top left no-repeat;
+    background-size: contain;
+    width: 15px;
+    height:15px;
+    text-indent: -9999px;
+    display: inline-block;
+    margin-right: 25px;
+}
+a[href*="plus.google"]{
+    background: url('img/g+.svg') top left no-repeat;
+    background-size: contain;
+    width: 15px;
+    height:15px;
+    text-indent: -9999px;
+    display: inline-block;
+    margin-right: 25px;
+}
+a[href*="mailto:?subject"]{
+    background: url('img/e-mail.svg') top left no-repeat;
     background-size: contain;
     width: 15px;
     height:15px;

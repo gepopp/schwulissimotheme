@@ -21,8 +21,167 @@
 .entry-summary {
 	margin: 1.5em 0 0;
 }
-
+.entry-footer{
+    margin:0 15px;
+}
 .page-links {
 	clear: both;
 	margin: 0 0 1.5em;
+}
+.entry-title{
+    color:$color__schwulissimo_red;
+    font-size: 28px;
+    font-weight: 600;
+}
+.entry-meta{
+    margin: 20px 0;
+    
+a.social-share{
+    background-size: contain;
+    background-position: center;
+    width: 30px;
+    height:20px;
+    text-indent: -9999px;
+    display: inline-block;
+    border: 1px solid $color__schwulissimo_red;
+    margin-left:5px;
+    margin-right:0;
+}
+    
+a[href^="https://www.facebook"]{
+    background: url('img/facebook.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+a[href^="https://www.twitter"]{
+    background: url('img/twitter.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+a[href*="whatsapp"]{
+    background: url('img/whatsapp.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+a[href*="plus.google"]{
+    background: url('img/g+.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+a[href*="mailto:"]{
+    background: url('img/e-mail.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+}
+#author-meta-box{
+    
+    padding-right: 50px;
+    margin-top: 5px;
+    font-size: 20px;
+    color: #999;
+    float:left;
+    
+    img.avatar{
+        display: inline;
+        vertical-align: baseline;
+        padding-left: 5px;
+        max-width: 75px;
+    }
+    .beside-image{
+        margin-bottom: 0;
+        line-height: 1;
+    }
+    a.author-profile-link{
+        color: $color__schwulissimo_red !important;
+        text-transform: capitalize;
+        font-size: 0.9rem;
+    }
+    .author-additional-info{
+        width: 100%;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        padding-top: 5px;
+        line-height: 1.25;
+    }        
+    span{
+    display: inline-block;
+    display: -moz-inline-box;
+    *display: inline; /* For IE7 */
+    zoom: 1; /* Trigger hasLayout */
+    width: 30%;
+    text-align: center;
+    }
+    
+    a.author-socials{
+    background-size: contain;
+    background-position: center;
+    width: 20px;
+    height:20px;
+    text-indent: -9999px;
+    display: inline-block;
+    margin-right:0;
+    
+   }
+    
+    
+   a[href^="https://www.facebook"]{
+    background: url('img/facebook-grey.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+a[href^="https://www.twitter"]{
+    background: url('img/twitter-grey.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+a[href^="mailto:"]{
+    background: url('img/e-mail-grey.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+a[href*="plus.google"]{
+    background: url('img/g+grey.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+
+}
+h3{
+.grey-spacer{
+    display: inline-block;
+    margin-right: 15px;
+}
+.grey-bottom-line{
+    
+    background-image: url('img/spacer-grey.png');
+    background-position-y: 50%;
+    background-position-x: 20px;
+    background-repeat: repeat-x;
+}
+}
+.post-preview{
+    padding-bottom: 20px;
+    img{
+        padding: 0 15px 15px 0;
+    }
+    .content-short{
+        font-size: 0.8rem;
+    }
+    .h5 a{
+        color: $color__schwulissimo_red;
+        font-size: 1.2rem;
+    }
+    .term{
+        margin-bottom:10px;
+        
+        a{
+            color:black;
+            &:hover, &:visited, &:active{
+                color:black;
+            }
+            
+        }
+        
+    }
 }

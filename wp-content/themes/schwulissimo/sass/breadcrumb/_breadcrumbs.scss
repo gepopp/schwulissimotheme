@@ -1,0 +1,13 @@
+.breadcrumbs{
+    
+    text-transform: uppercase;
+    
+    .glyphicon-chevron-right{
+        margin-left: -8px;
+        color: $color__schwulissimo-red;
+    }
+    a, a:hover, a:active, a:visited{
+        margin-right: 8px;
+        color: #999;
+    }
+}

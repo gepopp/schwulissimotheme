@@ -25,7 +25,21 @@
 		<?php
 		endif; ?>
 	</header><!-- .entry-header -->
-
+     
+        <div id="author-meta-box">
+            <?php
+                    $author = new BP_Core_User( get_the_author_meta('ID') );
+            ?>
+            <p class="beside-image">EIN<?php echo $author->avatar; ?></p><p class="beside-image">ARTIKEL VON</p>
+            <a href="<?php echo $author->user_url ?>" class="author-profile-link" ><?php echo $author->profile_data['Name']['field_data']?></a>
+            <div class="author-additional-info">
+                <a class="author-socials" href="<?php echo $author->profile_data['Facebook']['field_data'] ?>">Facebook</a>
+                <a class="author-socials" href="<?php echo $author->profile_data['Twitter']['field_data'] ?>">Facebook</a>
+                <a class="author-socials" href="<?php echo $author->profile_data['google plus']['field_data'] ?>">Facebook</a>
+                <a class="author-socials" href="mailto:<?php echo $author->email ?>">Mail</a>
+            </div>
+        </div>
+        
 	<div class="entry-content">
 		<?php
 			the_content( sprintf(
@@ -41,7 +55,5 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
-		<?php schwulissimo_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+	
 </article><!-- #post-## -->

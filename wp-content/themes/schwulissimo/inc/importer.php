@@ -159,12 +159,10 @@ add_action('admin_post_upload-importer-file', function(){
 
         print "</pre>";
     }); 
-    
-    
-    /**
-     * ajax action to get importer file information
-     */
-    add_action('wp_ajax_importer_get_fileinfo', function(){
+/**
+ * ajax action to get importer file information
+ */
+add_action('wp_ajax_importer_get_fileinfo', function(){
         
        
         
@@ -311,10 +309,8 @@ add_action('wp_ajax_importer_add_article', function(){
             die(); 
         });
         
-        
-        
-        //-------------------------------------------------------------------------------------------------------------
-        add_action( 'admin_menu', 'add_post_importer_options_pageII' );
+//-------------------------------------------------------------------------------------------------------------
+add_action( 'admin_menu', 'add_post_importer_options_pageII' );
 function add_post_importer_options_pageII(){
     add_submenu_page( 'edit.php', 'Importer II', 'ImporterII', 'manage_options', 'post_importerII', 'post_content_importerII');
 }
@@ -427,9 +423,7 @@ add_action('wp_ajax_delete_page', function(){
     
     
 });
-
-
- add_action('wp_ajax_delete_nrw', function(){
+add_action('wp_ajax_delete_nrw', function(){
            
          
            $args = array(
@@ -457,8 +451,7 @@ add_action('wp_ajax_delete_page', function(){
             die();
            
        });
-   //------------------------------------------------ Cityguide --------------------------------------------------------
-
+//------------------------------------------------ Cityguide --------------------------------------------------------
 add_action( 'admin_menu', 'add_cityguide_importer_options_page' );
 function add_cityguide_importer_options_page(){
     add_submenu_page( 'edit.php?post_type=post_citygiude', 'Importer', 'Importer', 'manage_options', 'cityguide_importer', 'cityguide_content_importer');
@@ -917,8 +910,7 @@ add_action('wp_ajax_importer_add_cityguide', function(){
             echo json_encode($row);
             die(); 
         });
-        
-        //--------------------------------------------------------------- media
+//--------------------------------------------------------------- media ----------------------------------------------
 add_action( 'admin_menu', 'add_image_importer_options_page' );
 function add_image_importer_options_page(){
     add_submenu_page( 'upload.php', 'Importer', 'Importer', 'manage_options', 'cityguide_importer', 'media_content_importer');
@@ -926,26 +918,114 @@ function add_image_importer_options_page(){
 function media_content_importer(){  
     echo '<h1>Media Importer</h1>';
     
-    $url = 'http://www.schwulissimo.de//bilder/190182/niederlande.jpg.jpg';
+    ?>
+     <form action="<?php echo home_url() ?>/wp-admin/admin-post.php" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="action"       value="upload-importer-file" />
+    <input type="file"   name="importer-file" />
+    <input type="submit" value="senden" />
+</form>
+<hr>
+    <?php if(isset($_GET['file'])):?>
 
-    file_put_contents(get_stylesheet_directory() . '/inc/img/test.jgp', file_get_contents($url));
-    
-    $ch = curl_init();
+    <button id="start-import">Import starten</button>
+    <hr>
+    <div id="import-status"></div>
+   
 
-    // set url
-    curl_setopt($ch, CURLOPT_URL, "http://www.schwulissimo.de//bilder/190182/niederlande.jpg.jpg");
+    <script>
+        jQuery(document).ready(function($){
+            
+            
+        var snd = new Audio("<?php echo get_stylesheet_directory_uri() . '/inc/beep-08b.wav' ?>"); // buffers automatically when created
 
-    //return the transfer as a string
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+            
+            var file = "<?php echo $_GET['file'] ?>";
+            var range = [];
+            
+            $('#start-import').click(function(){
+                
+                $.post(
+                    ajaxurl,
+            {
+            data: file,
+            action: "importer_get_fileinfo"
+            },
+            function(data){
+            
+           response = JSON.parse(data);
+           $('#import-status').append('<h5>Zeilen gesamt: ' + response.lines + '</h5>');
+           table = '<table border="1" id="status-lines"><thead><tr class="headline">';
+           table += '<th>lfd</th>';
+           $(response.firstLine).each(function(i,v){
+                table += '<th style="height:20px;overflow:hidden;">' + v + '</th>';
+           });
+           $('#status-lines tr.headline').append('<th>ID neu</th>');
+           table += '</tr></thead><tbody id="table-body"></tbody></table>';
+           $('#import-status').append(table);
+           range = response.range;
+           getShelfRecursive();
+           
+           });
+    });
+     function getShelfRecursive() {
 
-    // $output contains the output string
-    $output = curl_exec($ch);
-    
-    echo var_dump($output);
+    // terminate if array exhausted
+    if (range.length === 0)
+        return;
+   
+    // pop top value
+    var id = range[0];
+    range.shift();
+   
+    // ajax request
+    jQuery.ajax({
+            type: 'POST',
+            url:   ajaxurl,
+            data: {
+            data:    [id, file],
+            action: 'importer_add_add_media'
+        },
+            async:true,
+            success:  function(rsp){
+            cells = JSON.parse(rsp);
+            if(cells.line % 100 == 0){
+                            $('#table-body').html('<tr><td>' + cells.message + '</td></tr>' );
+            }else{
+            $('#table-body').prepend('<tr><td>' + cells.message + '</td></tr>' );
+            }
+            
+            /*
+           cellstring = "<tr>";    
+           cells = JSON.parse(rsp);
+           $(cells).each(function(i,v){
+           cellstring += '<td style="height:20px;overflow:hidden;">' + v + '</td>'; 
+           });
+           cellstring += '</tr>';
+           $('#table-body').prepend(cellstring);
+           */
+            getShelfRecursive();
+            }
+        }).fail(function(){
+        getShelfRecursive();
+        snd.play();
+        });
+}       
+            
+            
+            
+            
+        });//ready
 
-    // close curl resource to free up system resources
-    curl_close($ch); 
+   </script>
+   <style>
+       tr, td{
+           max-height: 30px;
+           height: 30px;
+           overflow: hidden;
+       }
+   </style>
+    <?php endif;?>
+    <?php 
     
     
     
@@ -1075,10 +1155,12 @@ function veranst_content_importer(){
            $('#table-body').prepend(cellstring);
             getShelfRecursive();
             }
-        }).fail(function(){
+        }).fail(function(error){
+        console.log(error);
         getShelfRecursive();
         snd.play();
         });
+    };
 }       
             
             
@@ -1113,6 +1195,7 @@ add_action('wp_ajax_importer_add_veranst', function(){
                     $row = str_getcsv( $handle[$data[0]], ";", '"', '\\');
                 } 
             }
+            fclose($handle);
            
             $args = array(
                 'post_type' => 'schwulissimo_veranst',
@@ -1144,4 +1227,146 @@ add_action('wp_ajax_importer_add_veranst', function(){
             echo json_encode($ids);
             die(); 
         });
+  add_action('wp_ajax_importer_add_add_media', function(){
       
+      
+            $data = $_POST['data'];
+            $filepath = get_stylesheet_directory() . '/inc/tmp/' . $data[1];
+
+            if (file_exists($filepath)) {
+                
+               if (($handle = file("$filepath")) !== FALSE) {
+                    $row = str_getcsv( $handle[$data[0]], ";", '"', '\\');
+                } 
+            }
+      
+            
+            
+            $imagename = $row[0] . $row[2] . '.' . $row[4];
+            
+            
+            
+            /*
+            try{
+            $allimages = scandir();
+            }catch(Exeption $e){
+                echo var_dump($e);
+                die();
+            }
+             * 
+             *  foreach($allimages as $image){
+                
+               
+            }  
+              */
+               
+            if ($handle = opendir(get_stylesheet_directory() . '/inc/tmp/artikel')) {
+                while (false !== ($entry = readdir($handle))) {
+                    if ($entry != "." && $entry != "..") {
+                        
+                  if( $imagename == $entry ){
+                   $file  =  $entry;
+                   $message = '';
+                   break;
+               }else{
+                   $file =  false;
+                   $message = 'File not Found: '. $imagename;
+               }
+                }
+                }
+                closedir($handle);
+                }
+            
+           
+               if($file){
+                  
+                  
+                   $sql = 'SELECT ID FROM wp_posts WHERE post_title LIKE "' . $row[2] . '" AND post_type LIKE "attachment"';
+                   global $wpdb;
+                   $old_images =  $wpdb->get_results($sql);
+                  
+                   
+                    
+                    $args = array(
+                       'post_type' => array('post', 'schwulissimo_veranst'),
+                       'meta_query' => array(
+                           'relation' => 'AND',
+                            array(
+                                'key'	 	=> 'id_alt',
+                                'value'	  	=> $row[1],
+                                'compare' 	=> '=',
+                               ),
+                       ),
+                   );
+                   $query = new WP_Query($args);  
+                   
+                   if($query->have_posts()):
+                    while($query->have_posts()):
+                       $query->the_post();
+                       $parent_post_id = get_the_ID();
+                           $type = get_post_type();
+                   endwhile;
+                   else:
+                   $message .= 'Parent not found ' . $row[1];
+                   $handle2 = fopen(get_stylesheet_directory() . '/inc/report/unfound_article.csv', 'a+');
+                   fwrite($handle2, $row[1] . PHP_EOL);
+                   fclose($handle2);
+                   endif;
+                    
+                  
+                   
+                   if( count($old_images) == 0 ){
+                   
+                          
+                       
+                    $file = get_stylesheet_directory() . '/inc/tmp/artikel/' . $file ;
+                    
+                    $filename = basename($file);
+                    $upload_file = wp_upload_bits($filename, null, file_get_contents($file));
+                    if (!$upload_file['error']) {
+                            $wp_filetype = wp_check_filetype($filename, null );
+                            $attachment = array(
+                                    'post_mime_type' => $wp_filetype['type'],
+                                    'post_parent' => $parent_post_id,
+                                    'post_title' => $row[2], //preg_replace('/\.[^.]+$/', '', $filename),
+                                    'post_excerpt' => $row[3],
+                                    'post_status' => 'inherit'
+                            );
+                            $attachment_id = wp_insert_attachment( $attachment, $upload_file['file'], $parent_post_id );
+                            if (!is_wp_error($attachment_id)) {
+                                    require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+                                    $attachment_data = wp_generate_attachment_metadata( $attachment_id, $upload_file['file'] );
+                                    $attachment_data['attachment_caption'] = $row[3];
+                                    wp_update_attachment_metadata( $attachment_id,  $attachment_data );
+                        }
+                       
+                       
+                       
+                   }// attachment not exists and post found
+                     }else{
+                         
+                         $attachment_id = $old_images[0]->ID;
+                     }
+               if($parent_post_id){
+                             set_post_thumbnail($parent_post_id, $attachment_id);
+                         }
+                
+            }//if (file exists)
+            else{
+                $handle = fopen(get_stylesheet_directory() . '/inc/report/unfound_images.csv', 'a+');
+                fwrite($handle, $row[0]. PHP_EOL);
+                fclose($handle);
+            }
+            unlink(get_stylesheet_directory() . '/inc/tmp/artikel/' . $imagename);
+            
+            $return['line'] = $data[0];
+                    $return['message'] = 'Line: ' . $data[0] . '</td><td>Noch ' . count(scandir(get_stylesheet_directory() . '/inc/tmp/artikel')) . '</td><td>Parent: <a href="' . get_edit_post_link($parent_post_id) . '" target="_blank">' 
+                . $parent_post_id . '</a></td><td>Media: <a href="' . get_edit_post_link($attachment_id) . '" target="_blank">' . $attachment_id . '</a></td><td>' . $message . '</td><td>' . $type;
+             
+            
+            echo json_encode($return);
+            die();
+                    
+      
+      
+  });    

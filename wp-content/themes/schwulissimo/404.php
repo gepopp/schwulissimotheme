@@ -13,46 +13,27 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 
 			<section class="error-404 not-found">
-				<header class="page-header">
-					<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'schwulissimo' ); ?></h1>
-				</header><!-- .page-header -->
-
-				<div class="page-content">
-					<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'schwulissimo' ); ?></p>
-
-					<?php
-						get_search_form();
-
-						the_widget( 'WP_Widget_Recent_Posts' );
-
-						// Only show the widget if site has multiple categories.
-						if ( schwulissimo_categorized_blog() ) :
-					?>
-
-					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'schwulissimo' ); ?></h2>
-						<ul>
-						<?php
-							wp_list_categories( array(
-								'orderby'    => 'count',
-								'order'      => 'DESC',
-								'show_count' => 1,
-								'title_li'   => '',
-								'number'     => 10,
-							) );
-						?>
-						</ul>
-					</div><!-- .widget -->
-
-					<?php
-						endif;
-
-						/* translators: %1$s: smiley */
-						$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'schwulissimo' ), convert_smilies( ':)' ) ) . '</p>';
-						the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
-
-						the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
+				<div class="page-content row">
+				
+                                     <div class="col-xs-12 col-md-9 col-md-push-3">
+                                        <img src="<?php echo get_stylesheet_directory_uri()?>/img/404.jpg" alt="the 404 gays" width="1100" height="825" />
+                                    </div>
+                                    
+                                    <div class="col-xs-12 col-md-3 col-md-pull-9">
+                                        <div class="text-404">
+                                        <h5>UPS..UNS findest du hier leider nicht</h5>
+                                        <h5>Es wurde kein Inhalt an dieser Stelle hinterlegt</h5>
+                                        <a href="<?php echo home_url() ?>">
+"
+                                        <h4 class="schwulissimo-red">
+                                            <span class="glyphicon glyphicon-chevron-left"></span> 
+                                            <span class="glyphicon glyphicon-chevron-left"></span> 
+                                            <span class="glyphicon glyphicon-chevron-left"></span> 
+                                            Hier gehts zur&uuml;ck</h4>
+                                        </a>
+                                        </div>
+                                    </div>
+                                   
 
 				</div><!-- .page-content -->
 			</section><!-- .error-404 -->

@@ -8,7 +8,12 @@ textarea {
 	@include font-size(1);
 	line-height: $font__line-height-body;
 }
+.schwulissimo-red{
+    color: $color__schwulissimo-red;
+}
 
 @import "headings";
 
 @import "copy";
+
+@import "links";

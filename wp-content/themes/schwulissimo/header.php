@@ -15,7 +15,7 @@ require_once get_stylesheet_directory() . '/wp_bootstrap_navwalker.php';
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="profile" href="http://gmpg.org/xfn/11">
-
+<meta property="og:image" content="http://www.coachesneedsocial.com/wp-content/uploads/2014/12/BannerWCircleImages-1.jpg" />
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -28,8 +28,8 @@ require_once get_stylesheet_directory() . '/wp_bootstrap_navwalker.php';
                 <div class="site-branding">
                     <div class="site-title">
                         <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
-                            <img src="<?php echo get_stylesheet_directory_uri() ?>/img/logo_500x63_transparent.png" width="400" height="50" alt="Schwulissimo Logo Schriftzug" />
-                            <img src="<?php echo get_stylesheet_directory_uri() ?>/img/slogan.jpg" width="93" height="50" alt="Schwulissimo Logo Schriftzug" class="hidden-xs" />
+                            <img src="<?php echo get_stylesheet_directory_uri() ?>/img/logo.png" width="400" height="50" alt="Schwulissimo Logo Schriftzug" />
+                            <img src="<?php echo get_stylesheet_directory_uri() ?>/img/slogan.png" width="93" height="50" alt="Schwulissimo Logo Schriftzug" class="hidden-xs"  id="slogan"/>
                         </a>
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span class="sr-only">Toggle navigation</span>
@@ -67,6 +67,7 @@ require_once get_stylesheet_directory() . '/wp_bootstrap_navwalker.php';
                         <script>
                             jQuery(document).ready(function($){
                             
+                            /*
                                 $('#bs-example-navbar-collapse-1, #bs-example-navbar-collapse-2').append('<ul class="nav navbar-nav navbar-right">' +
                                 '<li class="dropdown">' +
                                 '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="color: #e73c30;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp; Region:</span> W&auml;hle deine Region <span class="caret"></span></a>' +
@@ -77,7 +78,7 @@ require_once get_stylesheet_directory() . '/wp_bootstrap_navwalker.php';
                                         '<li role="separator" class="divider"></li>' +
                                         '<li><a href="#">Separated link</a></li>' +
                                         '</ul><li></ul>');
-
+*/
                                 if ($(window).scrollTop() > 100) {
                                     $('.hidden-nav').show();
                                     $('.hidden-nav').css('background', 'white');
@@ -116,8 +117,8 @@ require_once get_stylesheet_directory() . '/wp_bootstrap_navwalker.php';
                                         <span class="icon-bar"></span>
                                     </button>
                                     <a class="navbar-brand" href="<?php echo home_url(); ?>">
-                                        <img src="<?php echo get_stylesheet_directory_uri() ?>/img/logo_500x63_transparent.png" width="200" height="24" alt="Schwulissimo Logo Schriftzug" style="display: inline-block;" />
-                                        <img src="<?php echo get_stylesheet_directory_uri() ?>/img/slogan.jpg" width="48" height="24" alt="Schwulissimo Logo Schriftzug"  style="display: inline-block;" />
+                                        <img src="<?php echo get_stylesheet_directory_uri() ?>/img/logo.png" width="200" height="24" alt="Schwulissimo Logo Schriftzug" style="display: inline-block;" />
+                                        <img src="<?php echo get_stylesheet_directory_uri() ?>/img/slogan.png" width="48" height="24" alt="Schwulissimo Logo Schriftzug" id="hidden-slogan" style="display: inline-block;" />
                                     </a>
                                 </div>
 

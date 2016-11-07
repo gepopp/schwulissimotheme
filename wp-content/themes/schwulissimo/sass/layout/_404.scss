@@ -1,0 +1,42 @@
+.error-404{
+    .glyphicon-chevron-left{
+            top:0;
+            margin-left: -15px;
+        }
+    .glyphicon-chevron-left:nth-child(1){
+            margin-left: 0;
+        }
+    
+    @media screen and (min-width:992px){
+        .text-404{
+            position:absolute;
+            bottom:20px;
+            right: -100%;
+            z-index: 9999;
+        }
+        .row{
+        display: flex;
+        flex-wrap: wrap;
+        
+       div[class*='col-']{
+            display: flex;
+            flex-direction: column;
+        }
+        
+    }
+    }
+    @media screen and (max-width:991px){
+    
+        .text-404{
+            h4,h5{
+            font-size: 2em;
+            text-align: center;
+            }
+            padding: 20px 15px;
+        }
+    
+    
+    }
+    
+    
+}
