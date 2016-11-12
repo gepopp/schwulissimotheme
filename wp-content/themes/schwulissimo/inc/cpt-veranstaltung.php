@@ -33,7 +33,7 @@ function schwulissimo_veranstaltung_post_type() {
 		'label'                 => __( 'Veranstaltung', 'schwulissimo' ),
 		'description'           => __( 'Veranstaltugnen', 'schwulissimo' ),
 		'labels'                => $labels,
-		'supports'              => array( 'title','editor', 'thumbnail', 'author', 'revisions', 'comments'),
+		'supports'              => array( 'title','editor', 'thumbnail', 'author', 'revisions', 'comments', 'excerpt'),
 		'taxonomies'            => array( 'category', 'post_tag', ' post_region' ),
 		'hierarchical'          => false,
 		'public'                => true,

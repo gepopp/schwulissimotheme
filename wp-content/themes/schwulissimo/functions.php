@@ -230,3 +230,13 @@ function custom_excerpt_length( $length ) {
 	return 20;
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+
+
+function schwulissimo_contiue_reading_link($excerpt){
+            
+            
+            $excerpt = '<a href="' . get_the_permalink() . '" class="more-link"> mehr...</a>';
+            return $excerpt; 
+    
+}
+add_filter('excerpt_more', 'schwulissimo_contiue_reading_link');

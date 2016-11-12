@@ -7615,6 +7615,19 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
+h1.entry-title {
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+h3.entry-sutitle {
+  font-size: 1.1rem;
+}
+
+.entry-content {
+  text-align: justify;
+}
+
 p {
   margin-bottom: 1.5em;
 }
@@ -7743,6 +7756,62 @@ figure {
 table {
   margin: 0 0 1.5em;
   width: 100%;
+}
+
+.veranst-metabox {
+  width: 100%;
+  padding: 15px;
+  background-color: #373737;
+  border: 1px solid #eee;
+  color: white;
+}
+.veranst-metabox h1, .veranst-metabox h2, .veranst-metabox h3, .veranst-metabox h5, .veranst-metabox h4, .veranst-metabox h6 {
+  color: #E73C39;
+}
+.veranst-metabox .meta-col {
+  min-height: 150px;
+  border-right: 1px solid #999;
+}
+@media screen and (min-width: 768px) {
+  .veranst-metabox .meta-col {
+    border-left: 1px solid #999;
+  }
+}
+.veranst-metabox img {
+  margin-top: 10px;
+}
+.veranst-metabox ul {
+  padding: 0;
+  margin: 0;
+}
+.veranst-metabox .spacer {
+  border-bottom: 1px solid #999;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.veranst-metabox .btn-primary {
+  color: white;
+  background-color: #E73C39;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  margin: 15px 0;
+  display: inline-block;
+  line-height: .9;
+}
+.veranst-metabox a.cityguide-link {
+  color: white !important;
+  font-size: 1.15rem;
+}
+
+.veranst-review {
+  color: white;
+}
+.veranst-review .content-short {
+  background: #373737;
+}
+.veranst-review img {
+  width: 60%;
 }
 
 /*--------------------------------------------------------------
@@ -8115,9 +8184,6 @@ a:hover, a:active {
   font-weight: 600;
 }
 
-.entry-meta {
-  margin: 20px 0;
-}
 .entry-meta a.social-share {
   background-size: contain;
   background-position: center;
@@ -8156,11 +8222,25 @@ a:hover, a:active {
 }
 
 #author-meta-box {
-  padding-right: 50px;
-  margin-top: 5px;
+  text-align: center;
+  border: 1px solid #eee;
+  padding: 20px 0;
   font-size: 20px;
   color: #999;
   float: left;
+}
+@media screen and (max-width: 768px) {
+  #author-meta-box {
+    display: none;
+  }
+}
+#author-meta-box p, #author-meta-box a {
+  width: 80%;
+}
+#author-meta-box a.author-profile-link {
+  display: block;
+  text-align: left;
+  margin: 5px 15px;
 }
 #author-meta-box img.avatar {
   display: inline;
@@ -8178,11 +8258,13 @@ a:hover, a:active {
   font-size: 0.9rem;
 }
 #author-meta-box .author-additional-info {
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
   padding-top: 5px;
   line-height: 1.25;
+  text-align: center;
 }
 #author-meta-box span {
   display: inline-block;
@@ -8256,6 +8338,18 @@ h3 .grey-bottom-line {
 }
 .post-preview .term a:hover, .post-preview .term a:visited, .post-preview .term a:active {
   color: black;
+}
+
+.author-meta-box-compact p {
+  margin: 0 15px;
+  font-size: 0.75rem;
+  padding: 0;
+}
+
+@media screen and (max-width: 844px) {
+  .entry-headline {
+    padding: 0;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -8677,10 +8771,11 @@ a[href*="mailto:?subject"] {
 # Breadcrumbs
 --------------------------------------------------------------*/
 .breadcrumbs {
+  font-size: 0.75rem;
   text-transform: uppercase;
 }
 .breadcrumbs .glyphicon-chevron-right {
-  margin-left: -8px;
+  margin-left: -6px;
   color: #E73C39;
 }
 .breadcrumbs a, .breadcrumbs a:hover, .breadcrumbs a:active, .breadcrumbs a:visited {

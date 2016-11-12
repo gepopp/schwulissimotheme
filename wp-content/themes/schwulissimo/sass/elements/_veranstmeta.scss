@@ -1,0 +1,61 @@
+.veranst-metabox{
+    
+    width: 100%;
+    padding: 15px;
+    background-color: #373737;
+    border: 1px solid #eee;
+    color:white;
+    
+   
+    h1,h2,h3,h5,h4,h6{
+        color: $color__schwulissimo_red;
+    }
+    .meta-col{
+        min-height: 150px;
+        border-right: 1px solid #999;
+        @media screen and (min-width: 768px){
+            border-left: 1px solid #999;
+        }
+    }
+    img{
+        margin-top: 10px;
+    }
+    ul{
+        padding:0;
+        margin: 0;
+    }
+    .spacer{
+        border-bottom: 1px solid #999;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    
+    .btn-primary{
+        color:white;
+        background-color: $color__schwulissimo_red;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        margin: 15px 0;
+        display: inline-block;
+        line-height: .9;
+    }
+    a.cityguide-link{
+        color: white !important;
+        font-size: 1.15rem;
+    }
+    
+}
+.veranst-review{
+    
+    color: white;
+    
+    .content-short{
+        background: #373737;
+        
+    }
+    img{
+        width: 60%;
+    }
+    
+}

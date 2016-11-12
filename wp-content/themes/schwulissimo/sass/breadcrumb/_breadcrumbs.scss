@@ -1,9 +1,11 @@
 .breadcrumbs{
     
+    font-size: 0.75rem;
+    
     text-transform: uppercase;
     
     .glyphicon-chevron-right{
-        margin-left: -8px;
+        margin-left: -6px;
         color: $color__schwulissimo-red;
     }
     a, a:hover, a:active, a:visited{

@@ -33,7 +33,7 @@ function cityguide_custom_post_type() {
 		'label'                 => __( 'Cityguide', 'text_domain' ),
 		'description'           => __( 'Cityguide Entry', 'text_domain' ),
 		'labels'                => $labels,
-		'supports'              => array( ),
+		'supports'              => array( 'editor', 'title', 'thumbnail' ),
 		'taxonomies'            => array( 'category', 'post_tag', 'post_region' ),
 		'hierarchical'          => false,
 		'public'                => true,

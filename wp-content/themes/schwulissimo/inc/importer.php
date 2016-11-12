@@ -78,7 +78,7 @@ function post_content_importer(){
             url:   ajaxurl,
             data: {
             data:    [id, file],
-            action: 'importer_add_article'
+            action: 'termine_old_data'
         },
             async:true,
             success:  function(rsp){
@@ -1369,4 +1369,56 @@ add_action('wp_ajax_importer_add_veranst', function(){
                     
       
       
-  });    
+  });  
+  
+  /**
+   * import data from wp_termine table
+   */
+  
+  add_action('wp_ajax_termine_old_data', function(){
+      
+      
+       $data = $_POST['data'];
+            $filepath = get_stylesheet_directory() . '/inc/tmp/' . $data[1];
+
+            if (file_exists($filepath)) {
+                
+               if (($handle = file("$filepath")) !== FALSE) {
+                    $row = str_getcsv( $handle[$data[0]], ";", '"', '\\');
+                } 
+            }
+      
+            $return[] = $data[0];
+            
+            
+      $args = array(
+                       'post_type' => array('post', 'schwulissimo_veranst'),
+                       'meta_query' => array(
+                           'relation' => 'AND',
+                            array(
+                                'key'	 	=> 'id_alt',
+                                'value'	  	=> $row[1],
+                                'compare' 	=> '=',
+                               ),
+                       ),
+                   );
+                   $query = new WP_Query($args);  
+                       if($query->have_posts()):
+                           while($query->have_posts()):
+                           $query->the_post();
+                       
+                      
+                       
+                          update_field('field_5825ca617c42e', $row[2], get_the_ID()); // Ort
+                          update_field('field_5825d5393de3b', $row[4], get_the_ID()); // Location
+                          update_field('field_5825d54e3de3c', $row[5], get_the_ID()); // Zusatzinfo
+
+                           $return[] = '<a href="' . get_edit_post_link() .'">' .  get_the_ID() . '</a>'; 
+                       
+                           endwhile;
+                       endif;
+                       
+                           echo json_encode( $return );
+                           die();
+      
+  });
