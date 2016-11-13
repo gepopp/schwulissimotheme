@@ -1,0 +1,89 @@
+#author-meta-box{
+    
+    @media screen and (max-width:768px){
+            display:none;
+        }
+    border: 1px solid #eee;
+    padding: 20px 0 0 0;
+    font-size: 20px;
+    color: #999;
+    float:left;
+
+    p,a {
+        margin-left: 30px;
+    }
+    .role{
+            font-size: 14px;
+            line-height: 1;
+        }
+    a.author-profile-link{
+       display: block;
+       text-align: left;
+       margin-top: 15px;
+    }
+    img.avatar{
+        display: inline;
+        vertical-align: baseline;
+        padding-left: 5px;
+        max-width: 75px;
+        
+    }
+    .beside-image{
+        margin-bottom: 0;
+        line-height: 1;
+    }
+    a.author-profile-link{
+        color: $color__schwulissimo_red !important;
+        text-transform: capitalize;
+        font-size: 0.9rem;
+    }
+    .author-additional-info{
+        border-top: 1px solid #eee;
+        padding-top: 5px;
+        line-height: 1.25;
+        text-align: center;
+    }        
+    span{
+    display: inline-block;
+    display: -moz-inline-box;
+    *display: inline; /* For IE7 */
+    zoom: 1; /* Trigger hasLayout */
+    width: 30%;
+    text-align: center;
+    }
+    
+    a.author-socials{
+    background-size: contain;
+    background-position: center;
+    width: 20px;
+    height:20px;
+    text-indent: -9999px;
+    display: inline-block;
+    margin-right:0;
+    margin-left: 0;
+    
+   }
+    
+    
+   a[href^="https://www.facebook"]{
+    background: url('img/facebook-grey.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+a[href^="https://www.twitter"]{
+    background: url('img/twitter-grey.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+a[href^="mailto:"]{
+    background: url('img/e-mail-grey.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+a[href*="plus.google"]{
+    background: url('img/g+grey.svg') top left no-repeat;
+    background-size: 15px;
+    background-position: center;
+}
+
+}

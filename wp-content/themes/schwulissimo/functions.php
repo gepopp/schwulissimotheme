@@ -223,7 +223,6 @@ add_action( 'after_setup_theme', function(){
     add_image_size( 'schwuliisimo-detail-cols', 207, 170 );
     add_image_size( 'schwuliisimo-subpage-small', 488, 570 );
     add_image_size( 'schwuliisimo-ticket-small', 315, 195 );
-    add_image_size( 'schwuliisimo-ticket-small', 315, 195 );
     
 });
 function custom_excerpt_length( $length ) {
@@ -232,11 +231,18 @@ function custom_excerpt_length( $length ) {
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
 
-function schwulissimo_contiue_reading_link($excerpt){
+add_filter('excerpt_more', function($excerpt){
             
             
             $excerpt = '<a href="' . get_the_permalink() . '" class="more-link"> mehr...</a>';
             return $excerpt; 
     
-}
-add_filter('excerpt_more', 'schwulissimo_contiue_reading_link');
+});
+add_filter('posts_where', function ( $where ) {
+	
+	$where = str_replace("meta_key = 'schwulissimo_veranst_ort_und_termin_%", "meta_key LIKE 'schwulissimo_veranst_ort_und_termin_%", $where);
+
+	return $where;
+});
+
+
