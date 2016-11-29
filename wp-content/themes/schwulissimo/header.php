@@ -31,7 +31,7 @@ require_once get_stylesheet_directory() . '/wp_bootstrap_navwalker.php';
                             <img src="<?php echo get_stylesheet_directory_uri() ?>/img/logo.png" width="400" height="50" alt="Schwulissimo Logo Schriftzug" />
                             <img src="<?php echo get_stylesheet_directory_uri() ?>/img/slogan.png" width="93" height="50" alt="Schwulissimo Logo Schriftzug" class="hidden-xs"  id="slogan"/>
                         </a>
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#static-header-menu">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -58,7 +58,7 @@ require_once get_stylesheet_directory() . '/wp_bootstrap_navwalker.php';
                                 'depth' => 2,
                                 'container' => 'div',
                                 'container_class' => 'collapse navbar-collapse',
-                                'container_id' => 'bs-example-navbar-collapse-1',
+                                'container_id' => 'static-header-menu',
                                 'menu_class' => 'nav navbar-nav',
                                 'fallback_cb' => 'wp_bootstrap_navwalker::fallback',
                                 'walker' => new wp_bootstrap_navwalker())
@@ -67,18 +67,7 @@ require_once get_stylesheet_directory() . '/wp_bootstrap_navwalker.php';
                         <script>
                             jQuery(document).ready(function($){
                             
-                            /*
-                                $('#bs-example-navbar-collapse-1, #bs-example-navbar-collapse-2').append('<ul class="nav navbar-nav navbar-right">' +
-                                '<li class="dropdown">' +
-                                '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="color: #e73c30;"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp; Region:</span> W&auml;hle deine Region <span class="caret"></span></a>' +
-                                  '<ul class="dropdown-menu">' +
-                                        '<li><a href="#">Action</a></li>' +
-                                        '<li><a href="#">Another action</a></li>' +
-                                        '<li><a href="#">Something else here</a></li>' +
-                                        '<li role="separator" class="divider"></li>' +
-                                        '<li><a href="#">Separated link</a></li>' +
-                                        '</ul><li></ul>');
-*/
+                            
                                 if ($(window).scrollTop() > 100) {
                                     $('.hidden-nav').show();
                                     $('.hidden-nav').css('background', 'white');
@@ -88,7 +77,6 @@ require_once get_stylesheet_directory() . '/wp_bootstrap_navwalker.php';
                                 $(window).scroll(function () {
 
                                     var top = $(this).scrollTop();
-                                    console.log(top);
                                     if (top > 100) {
                                         $('.hidden-nav').fadeIn();
                                         $('.hidden-nav').css('background', 'white');

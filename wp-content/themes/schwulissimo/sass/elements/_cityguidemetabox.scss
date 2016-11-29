@@ -1,0 +1,44 @@
+.cityduide-meta-box-outer{
+    
+    background: #373737;
+    width: 100%;
+    color: white;
+    padding-top: 15px;
+    //padding-bottom: 15px;
+    h4, a.veranst-link{
+        color: $color__schwulissimo_red;
+        font-size: 1.1rem;
+    }
+    a.veranst-link{
+        font-size: 1.25em;
+    }
+    h5{
+        font-size: 0.9rem;
+        text-transform: none;
+    }
+    ul{
+        margin: 0;
+    }
+    span.glyphicon{
+        color: white;
+        margin-right: 5px;
+    }
+    a{
+        font-size: 0.9rem;
+        margin-right: 0 !important;
+        span.glyphicon{
+            color: $color__schwulissimo_red !important;
+            font-size: 15px;
+        }
+    }
+    a.btn-primary{
+        color:white;
+        background-color: $color__schwulissimo_red;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        margin: 15px 0;
+        display: inline-block;
+        line-height: .9;
+    }
+}

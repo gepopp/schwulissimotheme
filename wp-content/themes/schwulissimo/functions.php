@@ -106,14 +106,45 @@ add_action( 'widgets_init', 'schwulissimo_widgets_init' );
 function schwulissimo_scripts() {
         wp_enqueue_style( 'oswald-font', 'https://fonts.googleapis.com/css?family=Oswald' );
 	wp_enqueue_style( 'schwulissimo-style', get_stylesheet_uri() );
+            wp_enqueue_style( 'slider-css', get_stylesheet_directory_uri() . '/css/eagle.gallery.css' );
 	
 
-	wp_enqueue_script( 'schwulissimo-navigation', get_template_directory_uri() . '/js/main.min.js', array('jquery'), '20151215', true );
+	
 
 	wp_enqueue_script( 'schwulissimo-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
-
+	
+        wp_enqueue_script( 'google-maps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCJQi7ySNFDknUkgC0yBD1DVIkbBoi3dBg', array() );
+       
+        wp_enqueue_script( 'gallery-js', get_stylesheet_directory_uri() . '/js/dev/eagle.gallery.js', array('jquery') );
+        
+        
+        wp_register_script( 'schwulissimo-main', get_template_directory_uri() . '/js/main.min.js', array('jquery', 'google-maps', 'jquery-ui-autocomplete'), '20151215', true );
+        wp_register_script( 'schwulissimo-cityguide-single', get_template_directory_uri() . '/js/cityguide-single.min.js', array('schwulissimo-main'), '20151215', true );   
+        wp_register_script( 'schwulissimo-cityguide-archive', get_template_directory_uri() . '/js/dev/cityguide-archive.js', array('schwulissimo-main'), '20151215', true );   
+        
+        
+        wp_localize_script('schwulissimo-main', 'post_info', array('ID' => get_the_ID(), 
+            'markerIcon' => get_stylesheet_directory_uri().'/img/schwulissimo_map_icon.png',
+            'markerIconSmall' => get_stylesheet_directory_uri().'/img/schwulissimo_map_icon_small.png',
+            'needles' => schwulissimo_get_cityguide_needles(),
+            'spinner' => get_stylesheet_directory_uri().'/img/dashinfinity.gif',
+            'fastajax' => get_stylesheet_directory_uri() . '/inc/ajax-spped.php'
+            ));
+        wp_enqueue_script('schwulissimo-main');
+        
+       
+        
+        if(is_singular('post_citygiude')){
+            wp_enqueue_script('schwulissimo-cityguide-single'); 
+        }
+        
+        if(is_archive('post_cityguide')){
+            wp_localize_script('schwulissimo-cityguide-archive', 'cityguide_addresses', array('unique' => get_cityguide_addr(), 'cats' => get_cityguide_terms()));
+            wp_enqueue_script('schwulissimo-cityguide-archive'); 
+        }
+        
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
+            wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'schwulissimo_scripts' );
@@ -130,6 +161,11 @@ function schwulissimo_require_scripts() {
                 require_once $file; // delete file
         }
 } 
+/**
+ * Implement the Ajax functions
+ */
+require get_template_directory() . '/inc/ajax.php';
+
 /**
  * Implement the Custom Header feature.
  */
@@ -175,6 +211,7 @@ require get_template_directory() . '/inc/custom-taxonomy.php';
  */
 require get_template_directory() . '/inc/cpt-veranstaltung.php';
 require get_template_directory() . '/inc/cpt-cityguide.php';
+require get_template_directory() . '/inc/cpt-partypics.php';
 
 add_filter('get_search_form', function($html){
     
@@ -215,8 +252,8 @@ add_action( 'init', function() {
  */
 add_action( 'after_setup_theme', function(){ 
 
-    add_image_size( 'schwuliisimo-slider-large', 1005, 500 );
-    add_image_size( 'schwuliisimo-slider-small', 201, 101 );
+    add_image_size( 'schwuliisimo-slider-large', 1005, 500, array('center', 'center') );
+    add_image_size( 'schwuliisimo-slider-small', 201, 101, array('center', 'center') );
     add_image_size( 'schwuliisimo-story-index', 642, 600 );
     add_image_size( 'schwuliisimo-detail-medium', 615, 570 );
     add_image_size( 'schwuliisimo-detail-small', 226, 130 );
@@ -244,5 +281,43 @@ add_filter('posts_where', function ( $where ) {
 
 	return $where;
 });
+function get_cityguide_addr(){
+        
+        $sql  = 'SELECT DISTINCT meta_value FROM wp_postmeta WHERE meta_key = "cityguide_adresse"';
+        global $wpdb;
+        $res = $wpdb->get_results($sql);
+
+        if(is_array($res)):
+        foreach($res as $r){
+              $arr =  maybe_unserialize($r->meta_value);
+              if(is_array($arr) && array_key_exists('address', $arr)){
+              $arr1 = explode(',', $arr['address']);
+              $where[] = trim($arr1[1]);
+              }
+        }
+        endif;
+        return json_encode(array_values(array_unique($where)));
+}
+function get_cityguide_terms(){
+    
+        $terms = get_terms( 'cityguide_category', array('hide_empty' => true ));
+           if(is_array($terms)){
+               foreach($terms as $t){
+                        $what[] = array('label' => 'Kategorie: ' . htmlspecialchars_decode($t->name), 'value' => 'term_'.$t->term_id);
+               }
+           }
+           return json_encode($what);
+}
+function schwulissimo_add_custom_types( $query ) {
+  if( is_category() || is_tag() && empty( $query->query_vars['suppress_filters'] ) ) {
+    $query->set( 'post_type', array(
+     'post', 'post_citygiude', 'schwulissimo_veranst'
+		));
+	  return $query;
+	}
+}
+add_filter( 'pre_get_posts', 'schwulissimo_add_custom_types' );
+
+ 
 
 

@@ -12,7 +12,9 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header clearfix">
             <div id="author-meta-box" class=" col-sm-3">
-            <?php $author = new BP_Core_User( get_the_author_meta('ID') ); ?>
+            <?php 
+                if(class_exists('BP_Core_User')):    
+            $author = new BP_Core_User( get_the_author_meta('ID') ); ?>
             <p class="beside-image">EIN<?php echo $author->avatar; ?></p><p class="beside-image">ARTIKEL VON</p>
             <a href="<?php echo $author->user_url ?>" class="author-profile-link" ><?php echo $author->profile_data['Name']['field_data']?></a>
             <p class="role">Redakteur</p>
@@ -22,6 +24,8 @@
                 <a class="author-socials" href="<?php echo $author->profile_data['google plus']['field_data'] ?>">Facebook</a>
                 <a class="author-socials" href="mailto:<?php echo $author->email ?>">Mail</a>
             </div>
+            <?php endif;?>
+
         </div>
                     
         <div class="entry-headline col-xs-12 col-sm-9">
@@ -63,6 +67,4 @@
                    
 		?>
 	</div><!-- .entry-content -->
-
-	
 </article><!-- #post-## -->

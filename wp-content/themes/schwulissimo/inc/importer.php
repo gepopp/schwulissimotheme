@@ -62,6 +62,8 @@ function post_content_importer(){
            
            });
     });
+    
+    var counter = 0;
      function getShelfRecursive() {
 
     // terminate if array exhausted
@@ -83,36 +85,21 @@ function post_content_importer(){
             async:true,
             success:  function(rsp){
                 
-           cellstring = "<tr>";    
+           cellstring = "<tr>";   
+           cellstring += "<td>" + counter + '</td>';
            cells = JSON.parse(rsp);
            $(cells).each(function(i,v){
            cellstring += '<td style="height:20px;overflow:hidden;">' + v + '</td>'; 
            });
            cellstring += '</tr>';
-           $('#table-body').prepend(cellstring);
-           /*
-           if(id%1000 == 0){
-               thsd = id / 1000;
-               var hun = new Audio("<?php// echo get_stylesheet_directory_uri() . '/inc/wav/' ?>" + thsd + '.wav');
-               var hund = new Audio("<?php //echo get_stylesheet_directory_uri() . '/inc/wav/thousend.wav' ?>");
-              // hun.play();
-               hun.addEventListener("ended", function() {
-                // hund.play();
-               });
-           }
-           if(id%100 == 0 && id%1000 != 0){
-               hundret = id / 100;
-               var hun = new Audio("<?php// echo get_stylesheet_directory_uri() . '/inc/wav/' ?>" + hundret + '.wav');
-               var hund = new Audio("<?php //echo get_stylesheet_directory_uri() . '/inc/wav/hundred.wav' ?>");
-             //  hun.play();
-              // hun.addEventListener("ended", function() {
-                // hund.play();
-               });
+           
+           if(counter % 100 == 0){
+               $('#table-body').html(cellstring);
            }else{
-            var sin = new Audio("<?php //echo get_stylesheet_directory_uri() . '/inc/wav/' ?>" + id%100 + '.wav');
-              sin.play();
-            }
-            */
+               $('#table-body').prepend(cellstring);
+           }
+           
+            counter++;
             getShelfRecursive();
             }
         }).fail(function(){
@@ -1242,7 +1229,7 @@ add_action('wp_ajax_importer_add_veranst', function(){
       
             
             
-            $imagename = $row[0] . $row[2] . '.' . $row[4];
+            $imagename = $row[0] . $row[2] . '.' . $row[5];
             
             
             
@@ -1259,8 +1246,24 @@ add_action('wp_ajax_importer_add_veranst', function(){
                
             }  
               */
-               
-            if ($handle = opendir(get_stylesheet_directory() . '/inc/tmp/artikel')) {
+                $files = scandir(get_stylesheet_directory() . '/inc/tmp/text');
+                foreach($files as $entry){
+                    if ($entry != "." && $entry != "..") {
+                       
+                        
+                  if( $imagename == $entry ){
+                   $file  =  $entry;
+                   $message = '';
+                   break;
+               }else{
+                   $file =  false;
+                   $message = 'File not Found: '. $imagename;
+                     }
+                } 
+              }
+              
+             /*  
+            if ($handle = opendir() {
                 while (false !== ($entry = readdir($handle))) {
                     if ($entry != "." && $entry != "..") {
                         
@@ -1276,19 +1279,19 @@ add_action('wp_ajax_importer_add_veranst', function(){
                 }
                 closedir($handle);
                 }
-            
+            */
            
                if($file){
                   
-                  
+                  /*
                    $sql = 'SELECT ID FROM wp_posts WHERE post_title LIKE "' . $row[2] . '" AND post_type LIKE "attachment"';
                    global $wpdb;
                    $old_images =  $wpdb->get_results($sql);
-                  
+                  */
                    
                     
                     $args = array(
-                       'post_type' => array('post', 'schwulissimo_veranst'),
+                       'post_type' => array( 'post', 'schwulissimo_veranst'),
                        'meta_query' => array(
                            'relation' => 'AND',
                             array(
@@ -1304,22 +1307,24 @@ add_action('wp_ajax_importer_add_veranst', function(){
                     while($query->have_posts()):
                        $query->the_post();
                        $parent_post_id = get_the_ID();
+                           $date = get_the_time('Y-m-d H:i:s');
                            $type = get_post_type();
                    endwhile;
                    else:
                    $message .= 'Parent not found ' . $row[1];
-                   $handle2 = fopen(get_stylesheet_directory() . '/inc/report/unfound_article.csv', 'a+');
+                   $handle2 = fopen(get_stylesheet_directory() . '/inc/report/unfound_text.csv', 'a+');
                    fwrite($handle2, $row[1] . PHP_EOL);
                    fclose($handle2);
                    endif;
                     
                   
                    
-                   if( count($old_images) == 0 ){
+                   //if( count($old_images) == 0 ){
                    
                           
                        
-                    $file = get_stylesheet_directory() . '/inc/tmp/artikel/' . $file ;
+                    $file = get_stylesheet_directory() . '/inc/tmp/text/' . $file ;
+                    
                     
                     $filename = basename($file);
                     $upload_file = wp_upload_bits($filename, null, file_get_contents($file));
@@ -1330,25 +1335,35 @@ add_action('wp_ajax_importer_add_veranst', function(){
                                     'post_parent' => $parent_post_id,
                                     'post_title' => $row[2], //preg_replace('/\.[^.]+$/', '', $filename),
                                     'post_excerpt' => $row[3],
-                                    'post_status' => 'inherit'
+                                    'post_status' => 'inherit',
+                                    'post_date' => $date
                             );
                             $attachment_id = wp_insert_attachment( $attachment, $upload_file['file'], $parent_post_id );
                             if (!is_wp_error($attachment_id)) {
                                     require_once(ABSPATH . "wp-admin" . '/includes/image.php');
                                     $attachment_data = wp_generate_attachment_metadata( $attachment_id, $upload_file['file'] );
-                                    $attachment_data['attachment_caption'] = $row[3];
+                                    $attachment_data['attachment_caption'] = $row[4];
                                     wp_update_attachment_metadata( $attachment_id,  $attachment_data );
                         }
                        
                        
                        
                    }// attachment not exists and post found
+                   /*
                      }else{
                          
                          $attachment_id = $old_images[0]->ID;
                      }
+                   */  
+                   
                if($parent_post_id){
-                             set_post_thumbnail($parent_post_id, $attachment_id);
+                        
+                        $value = get_field('field_58069b05d9441', $parent_post_id);
+                        $value[] = $attachment_id;
+                        update_field('field_58069b05d9441', $value, $parent_post_id);
+                        
+
+                      //  set_post_thumbnail($parent_post_id, $attachment_id);
                          }
                 
             }//if (file exists)
@@ -1357,10 +1372,10 @@ add_action('wp_ajax_importer_add_veranst', function(){
                 fwrite($handle, $row[0]. PHP_EOL);
                 fclose($handle);
             }
-            unlink(get_stylesheet_directory() . '/inc/tmp/artikel/' . $imagename);
+            //unlink(get_stylesheet_directory() . '/inc/tmp/text/' . $imagename);
             
             $return['line'] = $data[0];
-                    $return['message'] = 'Line: ' . $data[0] . '</td><td>Noch ' . count(scandir(get_stylesheet_directory() . '/inc/tmp/artikel')) . '</td><td>Parent: <a href="' . get_edit_post_link($parent_post_id) . '" target="_blank">' 
+                    $return['message'] = 'Line: ' . $data[0] . '</td><td>Noch ' . count(scandir(get_stylesheet_directory() . '/inc/tmp/text')) . '</td><td>Parent: <a href="' . get_edit_post_link($parent_post_id) . '" target="_blank">' 
                 . $parent_post_id . '</a></td><td>Media: <a href="' . get_edit_post_link($attachment_id) . '" target="_blank">' . $attachment_id . '</a></td><td>' . $message . '</td><td>' . $type;
              
             
@@ -1413,7 +1428,7 @@ add_action('wp_ajax_importer_add_veranst', function(){
                           update_field('field_5825d5393de3b', $row[4], get_the_ID()); // Location
                           update_field('field_5825d54e3de3c', $row[5], get_the_ID()); // Zusatzinfo
 
-                           $return[] = '<a href="' . get_edit_post_link() .'">' .  get_the_ID() . '</a>'; 
+                           $return[] = 'ID-Alt: ' . $row[1] . 'post: <a href="' . get_edit_post_link() .'">' .  get_the_ID() . '</a>'; 
                        
                            endwhile;
                        endif;
@@ -1422,3 +1437,315 @@ add_action('wp_ajax_importer_add_veranst', function(){
                            die();
       
   });
+  
+  /*---------------------------------- Partypics --------------------------------------------------------------*/
+  add_action( 'admin_menu', 'add_partypics_importer_options_page' );
+function add_partypics_importer_options_page(){
+    add_submenu_page( 'edit.php?post_type=post_partypics', 'Importer', 'Importer', 'manage_options', 'post_importer', 'pics_content_importer');
+}
+/**
+ * Importer Options Page Content
+ */
+function pics_content_importer(){
+    
+    echo '<h1>Pics Importer</h1>';
+    
+    ?>
+    <button id="start-import">Import starten</button>
+    <hr>
+    <div id="import-status"></div>
+   
+
+    <script>
+     jQuery(document).ready(function($){
+    
+    var dfd;
+    
+    addImgRecusive = function(cells, id){
+            
+       if (!dfd) {// for first run create deffered
+        dfd = new jQuery.Deferred();
+        }
+           
+        
+            if (cells.length === 0){
+                dfd.resolveWith(this);// resolve deffered
+                return;
+                
+            }
+            
+            var img = cells[0];
+            cells.shift();
+      
+      
+      
+      jQuery.ajax({
+            type: "POST",
+            url: ajaxurl,
+            context: this,
+            data: 
+        {
+            data:    id,
+            img:    img,
+            action: 'importer_add_img'
+        },
+        success: function(rsp){
+            
+          $('#' + rsp).remove();
+         
+            
+          addImgRecusive(cells, id);
+           
+       }});
+       
+       return dfd.promise();
+       
+    }
+     function getShelfRecursive() {
+
+    // terminate if array exhausted
+    if (range.length === 0)
+        return;
+   
+    // pop top value
+    var id = range[0];
+    range.shift();
+   
+    // ajax request
+    jQuery.post(
+            ajaxurl,
+        {
+            data:    id,
+            action: 'importer_add_gallerie'
+        },
+        function(rsp){
+                
+            
+           cells = JSON.parse(rsp);
+           $(cells).each(function(i,v){
+               $('#import-status').prepend('<p id="' + id + '">' + v + '</p>');
+           });
+           
+           $.when(addImgRecusive(cells, id)).done( function(){
+               
+                  dfd = false;
+                  getShelfRecursive(); 
+           });
+            }
+        ).fail(function(error){
+        console.log(error);
+        getShelfRecursive();
+        snd.play();
+        });
+    };
+    
+    
+    
+    
+
+            var range = [];
+            
+            $('#start-import').click(function(){
+                
+                $.post(
+                    ajaxurl,
+            {
+            data: 'file',
+            action: "importer_get_galleries"
+            },
+            function(data){
+            
+           response = JSON.parse(data);
+           range = response.files;
+           $('#import-status').prepend(response.sum);
+           
+           getShelfRecursive();
+           
+           });
+    });
+    
+    
+    
+  });//ready 
+   </script>
+   <style>
+       tr, td{
+           max-height: 30px;
+           height: 30px;
+           overflow: hidden;
+       }
+   </style>
+         
+     <?php 
+    
+}      
+            
+            
+            
+           
+add_action('wp_ajax_importer_get_galleries', function(){
+    
+    // foreach(glob(get_stylesheet_directory() . '/inc/tmp/galerien/_/*.txt') as $file){
+            
+              $latest = new WP_Query( array (
+                'post_type'               => 'post_partypics',
+                'posts_per_page'        => -1,
+                'date_query' => array(
+		array(
+			
+			'before'    => array(
+				'year'  => 2011,
+				'month' => 09,
+				'day'   => 02,
+                            
+			),
+			'inclusive' => true,
+		),
+	),
+                'fields' => 'ids'
+            ));
+              $files['files'] = $latest->posts;
+         
+/*
+         
+            $path_parts = pathinfo($file);
+                if(preg_match("/(yt)/", $path_parts['filename'], $output_array) == 1 ){
+                $files['files'][] = $path_parts['filename'];
+            }
+
+            //echo $path_parts['dirname'], "--";
+            //echo $path_parts['basename'], "--";
+            //echo $path_parts['extension'], "--";
+            //echo $path_parts['filename'], PHP_EOL; // 
+            
+            
+     }
+     
+     */
+              $files['sum'] = count($files['files']);
+     echo json_encode($files);
+    die();
+    
+    });   
+    
+    
+    
+add_action('wp_ajax_importer_add_gallerie', function(){
+    
+    
+    
+                
+    
+   
+    
+    
+           // $file = get_stylesheet_directory() . '/inc/tmp/galerien/_/' . $_POST['data'] . '.txt';
+           // $title = file_get_contents($file);
+            
+                //$title = str_replace('<br />', ' ', $title);
+                    //$title = wp_strip_all_tags($title);
+            
+            
+            /*
+             preg_match('/(\d{2}.\d{2}.\d{4})/', $title, $date);
+                if(is_array($date)){
+                    $post_date = $date[0];
+                }
+                    $time = strtotime($post_date);
+                    $post_date = date('Y-m-d H:m', $time);
+                    
+            $args = array(
+                
+                'post_type' => 'post_partypics',
+                'post_title' => $title,
+                'post_content' => '',
+                'post_date' => $post_date,
+                'post_status' => 'publish'
+            );
+          
+            
+            
+      $post     =       wp_insert_post($args);
+      
+      update_field('field_581085e1ea5bb', (int) $_POST['data'], $post);
+      
+       $id_old =     str_replace('yt', '', $_POST['data']);
+       
+      $args = array(
+          'post_type' => 'post_partypics',
+          'meta_query' => array(
+                           'relation' => 'AND',
+                            array(
+                                'key'	 	=> 'id_alt',
+                                'value'	  	=> $id_old,
+                                'compare' 	=> '=',
+                               ),
+                       ),
+            );
+              
+            $post = new WP_Query($args);
+              
+            
+                  if($post->have_posts()){
+                          while ($post->have_posts()){
+                                  $post->the_post();
+                                      $id = get_the_ID();
+                                      
+                          }
+                  }
+                              
+                  wp_update_post(array('ID' => $id, 'post_content' => $title ));
+            */
+    
+    
+        $date = get_field('id_alt', $_POST['data']);
+        $folder = get_stylesheet_directory() . '/inc/tmp/galerien/_/' . $date;
+        
+        foreach(glob($folder . '/*.jpg') as $file){
+            
+            $imges[] = $file;   
+                   
+                   
+        }
+        echo json_encode($imges );
+        die();
+});
+add_action('wp_ajax_importer_add_img', function(){
+    
+    $file = $_POST['img'];
+    
+    
+    
+    
+                    $filename = basename($file);
+                    $upload_file = wp_upload_bits($filename, null, file_get_contents($file));
+                    if (!$upload_file['error']) {
+                            $wp_filetype = wp_check_filetype($filename, null );
+                            $attachment = array(
+                                    'post_mime_type' => $wp_filetype['type'],
+                                    'post_parent' => $_POST['data'],
+                                    'post_title' => get_the_title($_POST['data']), //preg_replace('/\.[^.]+$/', '', $filename),
+                                    'post_status' => 'inherit',
+                                'post_date' => get_the_time('Y-m-d H:i:s', $_POST['data'])
+                            );
+                            $attachment_id = wp_insert_attachment( $attachment, $upload_file['file'], $parent_post_id );
+                            if (!is_wp_error($attachment_id)) {
+                                    require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+                                    $attachment_data = wp_generate_attachment_metadata( $attachment_id, $upload_file['file'] );
+                                    wp_update_attachment_metadata( $attachment_id,  $attachment_data );
+                        }
+                       
+                       
+                       
+                   }
+                        $value = get_field('field_58069b05d9441', $_POST['data']);
+                        $value[] = $attachment_id;
+                        update_field('field_58069b05d9441', $value, $_POST['data']);  
+                        unset($file);
+                       
+                        echo $_POST['data'];
+                        die();
+    
+    
+    
+});

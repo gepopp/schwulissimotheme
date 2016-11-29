@@ -28,7 +28,7 @@ get_header(); ?>
                                         <h4 class="schwulissimo-red">
                                             <span class="glyphicon glyphicon-chevron-left"></span> 
                                             <span class="glyphicon glyphicon-chevron-left"></span> 
-                                            <span class="glyphicon glyphicon-chevron-left"></span> 
+                                            
                                             Hier gehts zur&uuml;ck</h4>
                                         </a>
                                         </div>
