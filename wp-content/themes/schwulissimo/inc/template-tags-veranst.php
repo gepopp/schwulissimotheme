@@ -95,11 +95,88 @@
         
     }
     
-    function schwulissimo_versnt_archive_searchbar(){
+    function schwulissimo_versnt_archive_searchbar($searchterm, $region, $when) {
+        
+            
         
         ?>
-        <div class="col-xs-12">
-                        
-        </div>            
-        <?php 
+                    <div class="row cityguide-searchbar" style="background-color: #373737">
+                                <form class="form-inline" action="<?php echo get_post_type_archive_link('schwulissimo_veranst') ?>" method="post">
+                                    <div class="col-sm-3">
+                                        <div class="form-group" id="veranst-where-container">
+                                            <label for="veranst-where">Wo:</label>
+                                            <select class="form-control" name="veranst-where">
+                                                <option value="all" <?php selected($region, 'all', true) ?> >Alle Regionen</option>
+                                                <?php
+                                                        $terms = get_terms('post_region', array('hide_empty' => true));
+                                                        foreach($terms as $term){
+                                                            echo '<option value="' . $term->term_id . '"  '. selected((int)$region, $term->term_id) .' >' . $term->name . '</option>';
+                                                        }
+                                                    ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group" id="veranst-what-container">
+                                            <label for="veranst-when">Wann:</label>
+                                            <select class="form-control" name="veranst-when">
+                                                <option value="today" <?php selected($when, 'today')?> >heute</option>
+                                                <option value="tomorrow" <?php selected($when, 'tomorrow')?> >morgen</option>
+                                                <option value="week" <?php selected($when, 'week')?> >diese Woche</option>
+                                                <option value="next-week" <?php selected($when, 'next-week')?> >n&auml;chste Woche</option>
+                                                <option value="month" <?php selected($when, 'month')?> >dieser Monat</option>
+                                                <option value="next-month" <?php selected($when, 'next-month')?> >n&auml;chster Monat</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group" id="varanst-what-container">
+                                            <label for="veranst-what">Was:</label>
+                                            <input type="text" class="form-control" id="veranst-what" name="veranst-what" placeholder="Stichwort" value="<?php echo $searchterm ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="submit" class="btn btn-default" name="search-submit" class="form-control" value="suchen">
+                                    </div>
+                                </form>
+                            </div>           
+                       
+        <?php
+    }
+    
+    function schwulissimo_veranst_get_date_id($when = false){
+        
+        $termine = false;
+        $veranst = get_schwulissimo_veranst_meta_short(get_the_ID());
+        $addTime = 0;
+        
+        $addTime = strtotime('now');
+        
+        if($when == 'tomorrow'){
+                $addTime = strtotime('tomorrow'); 
+         }
+         if($when == 'next-week'){
+                 $addTime = strtotime('next Monday');
+         }
+         if($when == 'next-month'){
+                 $addTime = strtotime('first day of next month');
+         }
+                $data = false;
+                
+                if(is_array($veranst)){
+                        foreach($veranst as $dl){
+                                foreach($dl['termine'] as $t){
+                                        $time = strtotime($t['datum'] . ' ' . $t['stunde'] . ':' . $t['minute']);
+                                    if( $time >= ( $addTime ) ){
+                                        $data['date'] = date('d.m.', $time);
+                                        $data['time'] = $t['stunde'] . ':' . $t['minute'];
+                                        $data['id'] = $dl['veranstaltungsort'][0];
+                                        break 2;
+                                    }
+                                }
+                            }
+                }elseif(get_field('event_date') != ''){
+                        $data['date'] = date('d.m.', strtotime(get_field('event_date')));
+                }
+                return $data;
     }

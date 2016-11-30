@@ -9,7 +9,7 @@
     text-align: bottom;
     padding: 50px 0 0 0;
     text-align: center;
-    z-index: 9999;
+    z-index: 900;
 }
 .veranst-slider-title-box{
     position: absolute;
@@ -23,7 +23,7 @@
     font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
-    z-index: 8888;
+    z-index: 800;
     a{
         color:white;
     }
@@ -36,11 +36,45 @@
     color: white;
     background: #373737;
     padding: 15px;
-    z-index: 9999;
+    z-index: 900;
     .veranst-title{
         width:50%;
         a{
         color:$color__schwulissimo_red;
     }
+    }
+}
+.veranst-archive-headline-date{
+    
+    background-color: $color__schwulissimo_red;
+    width: 50px;
+    height: 80px;
+    margin-bottom: -100px;
+    color: white;
+    text-align: center;
+    padding-top: 50px;
+    
+    
+}
+.veranst-archive-headline-title{
+    position:absolute;
+    background: #373737; 
+    width: 100%;
+    padding-left: 65px;
+    color: white;
+    a{
+        color:white;
+    }
+}
+.veranst-archive-infobox{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: white;
+    a{
+        color:white;
+    }
+    .glyphicon{
+        color: $color__schwulissimo_red;
+        margin-right: 15px;
     }
 }

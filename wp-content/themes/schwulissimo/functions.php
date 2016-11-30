@@ -253,12 +253,12 @@ add_action( 'after_setup_theme', function(){
 
     add_image_size( 'schwuliisimo-slider-large', 1005, 500, array('center', 'center') );
     add_image_size( 'schwuliisimo-slider-small', 201, 101, array('center', 'center') );
-    add_image_size( 'schwuliisimo-story-index', 642, 600 );
-    add_image_size( 'schwuliisimo-detail-medium', 615, 570 );
-    add_image_size( 'schwuliisimo-detail-small', 226, 130 );
-    add_image_size( 'schwuliisimo-detail-cols', 207, 170 );
-    add_image_size( 'schwuliisimo-subpage-small', 488, 570 );
-    add_image_size( 'schwuliisimo-ticket-small', 315, 195 );
+    add_image_size( 'schwuliisimo-story-index', 642, 600, array('center', 'center') );
+    add_image_size( 'schwuliisimo-detail-medium', 615, 570, array('center', 'center') );
+    add_image_size( 'schwuliisimo-detail-small', 226, 130, array('center', 'center') );
+    add_image_size( 'schwuliisimo-detail-cols', 207, 170, array('center', 'center') );
+    add_image_size( 'schwuliisimo-subpage-small', 488, 570, array('center', 'center') );
+    add_image_size( 'schwuliisimo-ticket-small', 315, 195, array('center', 'center') );
     
 });
 function custom_excerpt_length( $length ) {

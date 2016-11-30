@@ -11,6 +11,17 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
+            <h5><?php 
+                                    $type = get_post_type();
+                                    if($type == 'post'){
+                                        echo 'NEWS';
+                                    }elseif($type == 'post_citygiude'){
+                                        echo 'cityguide';
+                                    }elseif($type == 'schwulissimo_veranst'){
+                                        echo 'veranstaltung';
+                                    }
+                                
+                                ?></h5>
 		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
 		<?php if ( 'post' === get_post_type() ) : ?>

@@ -63,6 +63,8 @@ get_sidebar();
 </div><!-- sidebar -->
 <footer class="entry-footer">
                 <?php schwulissimo_buy_tips_teaser(); ?>
+    
+                <?php schwulissimo_section_headline('Mehr Events')?>
 
 		<?php schwulissimo_veranst_footer_additional(); ?>
     

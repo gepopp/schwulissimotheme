@@ -24,7 +24,9 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        
+        a{
+            color: white;
+        }
        
         
         
@@ -32,7 +34,7 @@
     .veranst-preview-content-short{
         
         background: #373737;
-        height:184px;
+        height:186px;
         padding: 15px;
         color:white;
         span{
