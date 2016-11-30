@@ -47,6 +47,7 @@ function schwulissimo_veranstaltung_post_type() {
 		'exclude_from_search'   => false,
 		'publicly_queryable'    => true,
 		'capability_type'       => 'page',
+                'rewrite'               => array('slug' => 'veranstaltungen')
 	);
 	register_post_type( 'schwulissimo_veranst', $args );
 

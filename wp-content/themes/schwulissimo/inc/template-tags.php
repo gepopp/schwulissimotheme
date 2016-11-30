@@ -123,7 +123,7 @@
                 'hide_empty' => 1,
                 // We only need to know if there is more than one category.
                 'number' => 2,
-                ));
+            ));
 
             // Count the number of categories that are attached to the posts.
             $all_the_cool_cats = count($all_the_cool_cats);
@@ -155,7 +155,7 @@
     add_action('save_post', 'schwulissimo_category_transient_flusher');
 
     function schwulissimo_entry_footer_additional() {
-        
+
         schwulissimo_section_headline('weitere themen');
         ?>
         <?php
@@ -176,11 +176,11 @@
                 ?>
                 <div class="col-md-6 col-xs-12 post-preview">
 
-                <?php if (has_post_thumbnail()) { ?>
+                    <?php if (has_post_thumbnail()) { ?>
                         <a href="<?php echo get_the_permalink() ?>"><?php the_post_thumbnail('schwuliisimo-detail-cols', array('class' => 'pull-left')) ?></a>   
-                <?php } else { ?>
+                    <?php } else { ?>
                         <a href="<?php echo get_the_permalink() ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/img/default-207x153.jpg' ?>" alt="schwulissimo default image" width="207" height="153" class="img-responsive pull-left" /></a>
-                <?php } ?>
+                    <?php } ?>
 
 
                     <div class="content-short">
@@ -191,185 +191,185 @@
 
 
                 </div>
-                    <?php
-                endwhile;
-                wp_reset_postdata();
-                echo '</div>';
-            endif;
-        }
+                <?php
+            endwhile;
+            wp_reset_postdata();
+            echo '</div>';
+        endif;
+    }
 
-        /**
-         * echo the additional event boxes
-         * 
-         * @todo mb display promoted events as payed
-         */
-        function schwulissimo_veranst_footer_additional($headline = true) {
+    /**
+     * echo the additional event boxes
+     * 
+     * @todo mb display promoted events as payed
+     */
+    function schwulissimo_veranst_footer_additional($headline = true) {
 
-            // add the headline
-            if (!$headline)
-                schwulissimo_section_headline('MEHR EVENTS');
+        // add the headline
+        if (!$headline)
+            schwulissimo_section_headline('MEHR EVENTS');
 
-            $date = date('Ymd');
-            $args = array(
-                'post_type' => 'schwulissimo_veranst',
-                'post_status' => 'publish',
-                'posts_per_page' => 2,
-                //'post__not_in' => array(get_the_ID()),
-                'post__in' => array('164404', '165962'),
-                'orderby' => 'rand',
-                'meta_query' => array(
-                    'relation' => 'AND',
+        $date = date('Ymd');
+        $args = array(
+            'post_type' => 'schwulissimo_veranst',
+            'post_status' => 'publish',
+            'posts_per_page' => 2,
+            //'post__not_in' => array(get_the_ID()),
+            'post__in' => array('164404', '165962'),
+            'orderby' => 'rand',
+            'meta_query' => array(
+                'relation' => 'AND',
+                array(
+                    'relation' => 'OR',
                     array(
-                        'relation' => 'OR',
-                        array(
-                            'key' => 'schwulissimo_veranst_ort_und_termin_%_termine_%_datum',
-                            'value' => $date,
-                            'compare' => '>=',
-                        ),
-                        array(
-                            'key' => 'event_date',
-                            'value' => $date,
-                            'compare' => '>',
-                        ),
-                    )
+                        'key' => 'schwulissimo_veranst_ort_und_termin_%_termine_%_datum',
+                        'value' => $date,
+                        'compare' => '>=',
+                    ),
+                    array(
+                        'key' => 'event_date',
+                        'value' => $date,
+                        'compare' => '>',
+                    ),
                 )
-            );
+            )
+        );
 
 
-            $query = new WP_Query($args);
+        $query = new WP_Query($args);
 
-            if ($query->have_posts()):
-                echo '<div class="row">';
-                while ($query->have_posts()):
-                    $query->the_post();
-                    ?>
+        if ($query->have_posts()):
+            echo '<div class="row">';
+            while ($query->have_posts()):
+                $query->the_post();
+                ?>
                 <div class="col-md-6 col-xs-12 post-preview veranst-preview">
                     <div class="veranst-preview-headline-date">
-                <?php
-                $termine = false;
-                $veranst = get_schwulissimo_veranst_meta_short(get_the_ID());
-                if (is_array($veranst) && !empty($veranst)) {
-                    foreach ($veranst as $v) {
-                        foreach ($v['termine'] as $t) {
-                            $termine[] = strtotime($t['datum']);
+                        <?php
+                        $termine = false;
+                        $veranst = get_schwulissimo_veranst_meta_short(get_the_ID());
+                        if (is_array($veranst) && !empty($veranst)) {
+                            foreach ($veranst as $v) {
+                                foreach ($v['termine'] as $t) {
+                                    $termine[] = strtotime($t['datum']);
+                                }
+                            }
                         }
-                    }
-                }
-                if (is_array($termine) && !empty($termine)) {
-                    natsort($termine);
-                    foreach ($termine as $t) {
-                        if ($t >= time()) {
-                            echo date('d.m.', $t);
-                            break;
+                        if (is_array($termine) && !empty($termine)) {
+                            natsort($termine);
+                            foreach ($termine as $t) {
+                                if ($t >= time()) {
+                                    echo date('d.m.', $t);
+                                    break;
+                                }
+                            }
+                        } elseif (get_field('event_date') != '') {
+                            echo date('d.m.', strtotime(get_field('event_date')));
+                        } else {
+                            echo 'k.A.';
                         }
-                    }
-                } elseif (get_field('event_date') != '') {
-                    echo date('d.m.', strtotime(get_field('event_date')));
-                } else {
-                    echo 'k.A.';
-                }
-                ?>
+                        ?>
 
                     </div>
                     <div class="veranst-preview-headline-title"><a href="<?php echo get_the_permalink() ?>" style="color:white;"><?php the_title() ?></a></div>
 
-                        <?php if (has_post_thumbnail()) { ?>
+                    <?php if (has_post_thumbnail()) { ?>
                         <a href="<?php echo get_the_permalink() ?>"><?php the_post_thumbnail('schwuliisimo-ticket-small', array('class' => 'pull-left')) ?></a>   
-                        <?php } else { ?>
+                    <?php } else { ?>
                         <a href="<?php echo get_the_permalink() ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/img/default-207x153.jpg' ?>" alt="schwulissimo default image" width="207" height="153" class="img-responsive pull-left" /></a>
-                        <?php } ?>
+                    <?php } ?>
                     <div class="veranst-preview-content-short">
                         <ul class="list-unstyled">
                             <li><span class="glyphicon glyphicon-map-marker hidden-xs"></span>
-                <?php
-                if (!is_array($veranst)) {
-                    echo get_field('field_5825ca617c42e');
-                    echo ' ';
-                    echo get_field('field_5825d5393de3b');
-                } else {
-                    $vID = $veranst[0]['veranstaltungsort'][0];
-                    // $addr = get_field('field_581702c7588d1', $vID);
-                    //echo $addr['address'];
-                    echo '<a href="' . get_the_permalink($vID) . '">' . get_the_title($vID) . '</a>';
-                }
-                ?>
+                                <?php
+                                if (!is_array($veranst)) {
+                                    echo get_field('field_5825ca617c42e');
+                                    echo ' ';
+                                    echo get_field('field_5825d5393de3b');
+                                } else {
+                                    $vID = $veranst[0]['veranstaltungsort'][0];
+                                    // $addr = get_field('field_581702c7588d1', $vID);
+                                    //echo $addr['address'];
+                                    echo '<a href="' . get_the_permalink($vID) . '">' . get_the_title($vID) . '</a>';
+                                }
+                                ?>
 
                             </li>
 
                             <li>
                                 <ul class="list-unstyled">
-                                <?php
-                                if (is_array($veranst)) {
-                                    $runner = 1;
-                                    foreach ($veranst[0]['termine'] as $t) {
+                                    <?php
+                                    if (is_array($veranst)) {
+                                        $runner = 1;
+                                        foreach ($veranst[0]['termine'] as $t) {
 
-                                        if (strtotime($t['datum']) < time())
-                                            continue;
+                                            if (strtotime($t['datum']) < time())
+                                                continue;
 
-                                        echo '<li><span class="glyphicon glyphicon-calendar hidden-xs"></span> ' . $t['datum'] . '</li>';
-                                        echo '<li><span class="glyphicon glyphicon-time hidden-xs"></span> ' . $t['stunde'] . ':' . $t['minute'] . '</li>';
-                                        $runner++;
-                                        if ($runner > 1)
-                                            break;
+                                            echo '<li><span class="glyphicon glyphicon-calendar hidden-xs"></span> ' . $t['datum'] . '</li>';
+                                            echo '<li><span class="glyphicon glyphicon-time hidden-xs"></span> ' . $t['stunde'] . ':' . $t['minute'] . '</li>';
+                                            $runner++;
+                                            if ($runner > 1)
+                                                break;
+                                        }
+                                        if (count($veranst[0]['termine']) > 1) {
+                                            echo '<li> <a class="more-appointment hidden-xs" href="' . get_the_permalink($vID) . '">weitere Termine anzeigen' . '</a>';
+                                            echo '<li><a class="more-appointment visible-xs" href="' . get_the_permalink($vID) . '">mehr...</a></li>';
+                                        }
+                                    } else {
+                                        $datetime = get_field('field_58108892ea5c7');
+                                        $datearr = explode(' ', $datetime);
+                                        if (is_array($datearr)) {
+                                            echo '<li><span class="glyphicon glyphicon-calendar hidden-xs"></span> ' . $datearr[0] . '</li>';
+                                            echo '<li><span class="glyphicon glyphicon-time hidden-xs"></span> ' . $datearr[1] . '</li>';
+                                        }
                                     }
-                                    if (count($veranst[0]['termine']) > 1) {
-                                        echo '<li> <a class="more-appointment hidden-xs" href="' . get_the_permalink($vID) . '">weitere Termine anzeigen' . '</a>';
-                                        echo '<li><a class="more-appointment visible-xs" href="' . get_the_permalink($vID) . '">mehr...</a></li>';
-                                    }
-                                } else {
-                                    $datetime = get_field('field_58108892ea5c7');
-                                    $datearr = explode(' ', $datetime);
-                                    if (is_array($datearr)) {
-                                        echo '<li><span class="glyphicon glyphicon-calendar hidden-xs"></span> ' . $datearr[0] . '</li>';
-                                        echo '<li><span class="glyphicon glyphicon-time hidden-xs"></span> ' . $datearr[1] . '</li>';
-                                    }
-                                }
-                                ?>
+                                    ?>
                                 </ul>
                             </li>
                         </ul>
                     </div>
                 </div><!-- outer -->
-                                    <?php
-                                endwhile;
-                                echo '</div>';
-                            endif;
-                        }
+                <?php
+            endwhile;
+            echo '</div>';
+        endif;
+    }
 
-                        /**
-                         * get the location and dates repeater
-                         * @param type $id
-                         * @return array repeater field
-                         */
-                        function get_schwulissimo_veranst_meta_short($id) {
+    /**
+     * get the location and dates repeater
+     * @param type $id
+     * @return array repeater field
+     */
+    function get_schwulissimo_veranst_meta_short($id) {
 
-                            return get_field('field_5819ccf689193', $id);
-                        }
+        return get_field('field_5819ccf689193', $id);
+    }
 
-                        /**
-                         * add the detail info box after descritption
-                         */
-                        function schwulissimo_verastaltung_add_metaboxes() {
+    /**
+     * add the detail info box after descritption
+     */
+    function schwulissimo_verastaltung_add_metaboxes() {
 
-                            $veranstaltungsorte = get_schwulissimo_veranst_meta_short(get_the_ID());
-                            if (is_array($veranstaltungsorte)):
-                                foreach ($veranstaltungsorte as $ort) {
-                                    ?>
+        $veranstaltungsorte = get_schwulissimo_veranst_meta_short(get_the_ID());
+        if (is_array($veranstaltungsorte)):
+            foreach ($veranstaltungsorte as $ort) {
+                ?>
                 <div class="veranst-metabox clearfix">
                     <div class="col-sm-4 hidden-xs">
 
-                <?php
-                $veranstalter = $ort['veranstaltungsort'][0];
-                $link = get_the_permalink($veranstalter);
-                echo '<a href="' . $link . '">';
-                if (has_post_thumbnail($veranstalter)) {
-                    echo get_the_post_thumbnail($veranstalter, 'thumbnail');
-                } else {
-                    $lat = get_field('field_581702c7588d1', $veranstalter)['lat'];
-                    $lng = get_field('field_581702c7588d1', $veranstalter)['lng'];
-                    ?>
+                        <?php
+                        $veranstalter = $ort['veranstaltungsort'][0];
+                        $link = get_the_permalink($veranstalter);
+                        echo '<a href="' . $link . '">';
+                        if (has_post_thumbnail($veranstalter)) {
+                            echo get_the_post_thumbnail($veranstalter, 'thumbnail');
+                        } else {
+                            $lat = get_field('field_581702c7588d1', $veranstalter)['lat'];
+                            $lng = get_field('field_581702c7588d1', $veranstalter)['lng'];
+                            ?>
                             <img  src="http://maps.google.com/maps/api/staticmap?center=<?php echo $lat . ',' . $lng ?>&amp;zoom=16&amp;size=150x150&amp;&key=AIzaSyCJQi7ySNFDknUkgC0yBD1DVIkbBoi3dBg&markers=size:mid%7Ccolor:red%7Clabel:S%7C<?php echo $lat . ',' . $lng ?>">
-                <?php } ?>
+                        <?php } ?>
                         </a>
                     </div>
                     <div class="col-xs-6 col-sm-4">
@@ -384,59 +384,59 @@
                     <div class="col-xs-6 col-sm-4">
                         <h4>Termine</h4>
                         <ul class="list-unstyled">
-                        <?php
-                        foreach ($ort['termine'] as $termin) {
-                            if (strtotime($termin['datum']) >= time()) {
-                                echo '<li>' . $termin['datum'] . ' um: ' . $termin['stunde'] . ':' . $termin['minute'] . '</li>';
+                            <?php
+                            foreach ($ort['termine'] as $termin) {
+                                if (strtotime($termin['datum']) >= time()) {
+                                    echo '<li>' . $termin['datum'] . ' um: ' . $termin['stunde'] . ':' . $termin['minute'] . '</li>';
+                                }
                             }
-                        }
-                        ?>
+                            ?>
                         </ul>
                     </div>
                     <div class="col-xs-12">
-                <?php
-                $affi = $ort['schwulissimo_veranst_affiliate_link'];
-                if ($affi != ''):
-                    ?>
+                        <?php
+                        $affi = $ort['schwulissimo_veranst_affiliate_link'];
+                        if ($affi != ''):
+                            ?>
 
                             <div class="spacer"></div>
                             <a class="btn-primary" href="<?php echo $affi ?>">Jetzt Tickets kaufen</a>
 
-                            <?php endif; ?>
+                        <?php endif; ?>
                     </div>
 
                 </div>
-                            <?php
-                        }
-                    endif; //is_array
-                }
+                <?php
+            }
+        endif; //is_array
+    }
 
-                function schwulissimo_buy_tips_teaser() {
+    function schwulissimo_buy_tips_teaser() {
 
-                    schwulissimo_section_headline('MEHR UNTERHALTUNG');
+        schwulissimo_section_headline('MEHR UNTERHALTUNG');
 
-                    $args = array(
-                        'post_type' => 'post',
-                        'posts_per_page' => 3,
-                        'orderby' => 'rand',
-                        'meta_query' => array(array('key' => '_thumbnail_id')),
-                        'tax_query' => array(
-                            'relation' => 'AND',
-                            array(
-                                'taxonomy' => 'category',
-                                'field' => 'slug',
-                                'terms' => array('buecher', 'dvdblue-ray', 'erotik', 'kino', 'konzerte', 'musik'),
-                            ),
-                        )
-                    );
-                    $query = new WP_Query($args);
-                    if ($query->have_posts()):
-                        echo '<div class="row">';
-                        while ($query->have_posts()):
-                            $query->the_post();
-                            if (!has_post_thumbnail())
-                                continue;
-                            ?>
+        $args = array(
+            'post_type' => 'post',
+            'posts_per_page' => 3,
+            'orderby' => 'rand',
+            'meta_query' => array(array('key' => '_thumbnail_id')),
+            'tax_query' => array(
+                'relation' => 'AND',
+                array(
+                    'taxonomy' => 'category',
+                    'field' => 'slug',
+                    'terms' => array('buecher', 'dvdblue-ray', 'erotik', 'kino', 'konzerte', 'musik'),
+                ),
+            )
+        );
+        $query = new WP_Query($args);
+        if ($query->have_posts()):
+            echo '<div class="row">';
+            while ($query->have_posts()):
+                $query->the_post();
+                if (!has_post_thumbnail())
+                    continue;
+                ?>
                 <div class="col-xs-4 teaser-thumnail">
                     <a href="<?php echo get_the_permalink() ?>"><?php the_post_thumbnail('large') ?></a>   
                 </div>
@@ -454,11 +454,13 @@
     function schwulissimo_section_headline($text, $color = 'black') {
         ?>
         <h3 style="display:table; overflow:hidden; <?php echo $color == 'red' ? 'color: #E63E3B;' : '' ?> "><span style="display:table-cell; white-space: nowrap;"><div class="grey-spacer" <?php echo $color == 'red' ? 'style="background-color: #E63E3B;"' : '' ?>></div><div style="display:inline;"><?php echo $text ?></div></span>
-            <span  style="display: table-cell; width: 100%; position: relative;"><div style="position:absolute;width: 100%; height: 100%; margin-left: 20px;<?php echo $color == 'red' ? 'background-image: url('.get_stylesheet_directory_uri() . '/img/bg1x1red.png);' : '' ?>" class="grey-bottom-line" ></div></span></h3>
+            <span  style="display: table-cell; width: 100%; position: relative;"><div style="position:absolute;width: 100%; height: 100%; margin-left: 20px;<?php echo $color == 'red' ? 'background-image: url(' . get_stylesheet_directory_uri() . '/img/bg1x1red.png);' : '' ?>" class="grey-bottom-line" ></div></span></h3>
         <?php
     }
 
     function schwulissimo_cityguide_single_meta_box() {
+
+
         $parent_id = get_the_ID();
         $args = array(
             'post_type' => 'schwulissimo_veranst',
@@ -482,24 +484,24 @@
         <div class="cityduide-meta-box-outer">
 
             <div class="col-sm-12">
-        <?php schwulissimo_section_headline('Location Info'); ?>
+                <?php schwulissimo_section_headline('Location Info'); ?>
             </div>
             <div class="col-sm-4">
                 <h4>Kontakt</h4>
-        <?php
-        $addressarray = get_field('field_581702c7588d1');
-        ?>
+                <?php
+                $addressarray = get_field('field_581702c7588d1');
+                ?>
                 <address style="margin-bottom: 0;">
-        <?php echo $addressarray['address']; ?>
+                    <?php echo $addressarray['address']; ?>
                 </address>
-        <?php the_field('field_5817031f588d2') ?><br>
+                <?php the_field('field_5817031f588d2') ?><br>
 
                 <ul class="list-unstyled list-inline">
-        <?php if (get_field('field_58170355588d4') != ''): ?><a href="<?php the_field('field_58170355588d4') ?>"><span class="glyphicon glyphicon-globe"></span>             </a><?php endif; ?>
-        <?php if (get_field('field_58170336588d3') != ''): ?><a href="mailto:<?php the_field('field_58170336588d3') ?>"><span class="glyphicon glyphicon-envelope"></span>   </a><?php endif; ?>
-                <?php if (get_field('field_58319a7baaf5b') != ''): ?><a href="<?php the_field('field_58319a7baaf5b') ?>">facebook                                                    </a><?php endif; ?>
-                <?php if (get_field('field_58319a8aaaf5c') != ''): ?><a href="<?php the_field('field_58319a8aaaf5c') ?>">twitter                                                     </a><?php endif; ?>
-        <?php if (get_field('field_58319a9faaf5d') != ''): ?><a href="<?php the_field('field_58319a9faaf5d') ?>">facebook                                                    </a><?php endif; ?>
+                    <?php if (get_field('field_58170355588d4') != ''): ?><a href="<?php the_field('field_58170355588d4') ?>"><span class="glyphicon glyphicon-globe"></span>             </a><?php endif; ?>
+                    <?php if (get_field('field_58170336588d3') != ''): ?><a href="mailto:<?php the_field('field_58170336588d3') ?>"><span class="glyphicon glyphicon-envelope"></span>   </a><?php endif; ?>
+                    <?php if (get_field('field_58319a7baaf5b') != ''): ?><a href="<?php the_field('field_58319a7baaf5b') ?>">facebook                                                    </a><?php endif; ?>
+                    <?php if (get_field('field_58319a8aaaf5c') != ''): ?><a href="<?php the_field('field_58319a8aaaf5c') ?>">twitter                                                     </a><?php endif; ?>
+                    <?php if (get_field('field_58319a9faaf5d') != ''): ?><a href="<?php the_field('field_58319a9faaf5d') ?>">facebook                                                    </a><?php endif; ?>
                 </ul>
             </div>
             <div class="col-sm-4">
@@ -518,64 +520,64 @@
             <div class="col-sm-4">
                 <h4>Schlagworte</h4>
                 <ul class="list-unstyled">
-        <?php
-        $tags = get_the_tags();
-        if (is_array($tags)) {
-            foreach ($tags as $tag) {
-                echo get_archives_link(home_url() . '/cityguide/' . $tag->slug, $tag->name, 'html', '<li>', '</li>');
-            }
-        }
-        ?>
+                    <?php
+                    $tags = get_the_tags();
+                    if (is_array($tags)) {
+                        foreach ($tags as $tag) {
+                            echo get_archives_link(home_url() . '/cityguide/' . $tag->slug, $tag->name, 'html', '<li>', '</li>');
+                        }
+                    }
+                    ?>
                 </ul>
                 <h4>Kategorien</h4>
                 <ul class="list-unstyled">
-        <?php
-        $tags = get_the_terms(get_the_ID(), 'cityguide_category');
-        //echo var_dump($tags);
-        if (is_array($tags)) {
-            foreach ($tags as $tag) {
-                echo get_archives_link(home_url() . '/cityguide/' . $tag->slug, $tag->name, 'html', '<li>', '</li>');
-            }
-        }
-        ?>
-                </ul>
-            </div>
-            <div class="col-sm-12">
-                    <?php if ($location_query->have_posts()): ?>
-            <?php schwulissimo_section_headline('Veranstaltungen'); ?>
-                </div>
-                        <?php while ($location_query->have_posts()): ?>
-                            <?php $location_query->the_post() ?>
-                    <div class="row" style="margin: 15px 0;">
-                        <div class="col-sm-4"><a class="veranst-link" href="<?php the_permalink() ?>"><?php the_title() ?></a></div>
-
-
-                        <div class="col-sm-4">
-                            <?php
-                            $orte = get_field('schwulissimo_veranst_ort_und_termin');
-                            ?>
-                            <ul class="list-unstyled">
-                <?php
-                foreach ($orte as $ort) {
-                    if (is_array($ort['veranstaltungsort']) && in_array($parent_id, $ort['veranstaltungsort'])) {
-                        foreach ($ort['termine'] as $t) {
-                            $ttime = strtotime($t['datum'] . ' ' . $t['stunde'] . ':' . $t['minute']);
-                            if ($ttime >= time()) {
-                                $termine[] = '<li>' . $t['datum'] . ' ' . $t['stunde'] . ':' . $t['minute'] . '</li>';
-                            }
+                    <?php
+                    $tags = get_the_terms(get_the_ID(), 'cityguide_category');
+                    //echo var_dump($tags);
+                    if (is_array($tags)) {
+                        foreach ($tags as $tag) {
+                            echo get_archives_link(home_url() . '/cityguide/' . $tag->slug, $tag->name, 'html', '<li>', '</li>');
                         }
                     }
-                }
-                if (count($termine) > 0) {
-                    echo $termine[0];
-                    if (count($termine) > 1) {
-                        echo '<li>weitere ' . (count($termine) - 1) . ' Termine.</li>';
-                    }
-                }
-                ?>
-                            </ul>
-                        </div>
-                        <div class="col-sm-4">
+                    ?>
+                </ul>
+            </div>
+
+            <?php if ($location_query->have_posts()): ?>
+                <div class="col-sm-12">
+                    <?php schwulissimo_section_headline('Veranstaltungen'); ?>
+                    <?php while ($location_query->have_posts()): ?>
+                        <?php $location_query->the_post() ?>
+                        <div class="row" style="margin: 15px 0;">
+                            <div class="col-sm-4"><a class="veranst-link" href="<?php the_permalink() ?>"><?php the_title() ?></a></div>
+
+
+                            <div class="col-sm-4">
+                                <?php
+                                $orte = get_field('schwulissimo_veranst_ort_und_termin');
+                                ?>
+                                <ul class="list-unstyled">
+                                    <?php
+                                    foreach ($orte as $ort) {
+                                        if (is_array($ort['veranstaltungsort']) && in_array($parent_id, $ort['veranstaltungsort'])) {
+                                            foreach ($ort['termine'] as $t) {
+                                                $ttime = strtotime($t['datum'] . ' ' . $t['stunde'] . ':' . $t['minute']);
+                                                if ($ttime >= time()) {
+                                                    $termine[] = '<li>' . $t['datum'] . ' ' . $t['stunde'] . ':' . $t['minute'] . '</li>';
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (count($termine) > 0) {
+                                        echo $termine[0];
+                                        if (count($termine) > 1) {
+                                            echo '<li>weitere ' . (count($termine) - 1) . ' Termine.</li>';
+                                        }
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                            <div class="col-sm-4">
                                 <?php
                                 if (get_field('schwulissimo_veranst_affiliate_link') != '') {
                                     echo '<a class="btn-primary" href="' . get_field('schwulissimo_veranst_affiliate_link') . '">Jetzt Tickets kaufen</a>';
@@ -583,24 +585,23 @@
                                     echo '<a href="' . get_the_permalink() . '">mehr...</a></div>';
                                 }
                                 ?>
+                            </div>
                         </div>
-                            <?php endwhile; ?>
-                        <?php endif;
-                        wp_reset_postdata(); ?>
-                    </div>
-                <div class="clearfix"></div>
+                    <?php endwhile; ?>
+                <?php endif;
+                wp_reset_postdata();
+                ?>
 
 
-                <div class="col-sm-12">
-                    <?php schwulissimo_section_headline('Karte'); ?>
-                </div>
-                <div style="width: 100%; padding:0 15px 15px 15px;">
+
+                <div class="col-xs-12">
+        <?php schwulissimo_section_headline('Karte'); ?>
+                </div>       
                 <div id="cityguide-single-map" style="width: 100%; min-height: 500px; background: #373737;"></div> 
-                </div>
             </div>
-                           <div class="clearfix"></div>
+            <div class="clearfix"></div>
 
 
-                    <?php
-                }
-                
+            <?php
+        }
+        

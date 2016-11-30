@@ -46,8 +46,8 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 # Administration Section
 # Footer
 # 404
+# breadcrumbs
 # archives
-#breadcrumbs
 
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
@@ -9008,4 +9008,53 @@ ul.ui-autocomplete li {
 
 #cityguide-col {
   padding-top: 20px;
+}
+
+.veranst-slider-date-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 80px;
+  background: #E73C39;
+  color: white;
+  text-align: bottom;
+  padding: 50px 0 0 0;
+  text-align: center;
+  z-index: 9999;
+}
+
+.veranst-slider-title-box {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  padding: 0 0 0 65px;
+  background: #373737;
+  width: 100%;
+  color: white;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 8888;
+}
+.veranst-slider-title-box a {
+  color: white;
+}
+
+.veranst-slider-meta-box {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60%;
+  color: white;
+  background: #373737;
+  padding: 15px;
+  z-index: 9999;
+}
+.veranst-slider-meta-box .veranst-title {
+  width: 50%;
+}
+.veranst-slider-meta-box .veranst-title a {
+  color: #E73C39;
 }

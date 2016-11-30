@@ -1,4 +1,4 @@
-/* Eagle Gallery - 2016-03-22 
+/* Eagle Gallery - 2016-03-22 Popp Gerhard
    http://codecanyon.net/item/eagle-gallery-responsive-touch-zoom-product-gallery/13625789 */
 if (typeof Object.create !== "function") {
     Object.create = function (obj) {
@@ -9,7 +9,7 @@ if (typeof Object.create !== "function") {
 }
 
 (function ($, window, document) {
-
+        
 	var Gallery = {
 
         global: {
@@ -61,8 +61,28 @@ if (typeof Object.create !== "function") {
                 var medium_src = gal.$elem.find('img:nth-of-type(1)').data('medium-img');
                 var medium_title = gal.$elem.find('img:nth-of-type(1)').data('title');
                 var medium_cap = gal.$elem.find('img:nth-of-type(1)').data('copy');
+                var slider_type = gal.$elem.find('img:nth-of-type(1)').data('type');
+                var slider_data = gal.$elem.find('img:nth-of-type(1)').data('veranst');
+                var link = gal.$elem.find('img:nth-of-type(1)').data('link');
+               
+                
+                if(typeof slider_type !== 'undefined'  && slider_type == 'veranst-archive'){
+                  
+                gal.$elem.prepend('<div class="eagle-medium-wrap">\n\
+                                   <a class="eagle-view-medium-img">\n\
+                                   <img src="'+ medium_src +'" alt=""></a>\n\\n\
+                                   <div class="veranst-slider-title-box"><h5>' + slider_data.location + '<h5></div>\n\
+                                   <div class="veranst-slider-date-box">' + slider_data.date + '</div>\n\
+                                   <div class="veranst-slider-meta-box">\n\
+                                   <div class="veranst-title"><h3><a href="' + link + '">' + slider_data.title + '</a></h3></div>\n\
+                                   <div class="veranst-meta"><div class="time"><span class="glyphicon glyphicon-time"></span> ' + slider_data.time + ' Uhr</div>\n\
+                                   <div class="address"><span class="glyphicon glyphicon-globe"></span> ' + slider_data.address + '</div> \n\
+                                   </div>\n\
+                                   </div>\n\
+                                   </div>');
+                }else{
                 gal.$elem.prepend('<div class="eagle-medium-wrap"><a class="eagle-view-medium-img"><img src="'+ medium_src +'" alt=""></a><div class="gal-infobox">'+medium_title+'<span class="pull-right">'+medium_cap+'</div></div>');
-
+                }
                 gal.$medium = gal.$elem.find('.eagle-medium-wrap');
 
                 gal.global.showMediumImg = true;
@@ -207,7 +227,17 @@ if (typeof Object.create !== "function") {
 
             var new_src = $this.data('medium-img');
             var new_text  = $this.data('title');
-            $('.gal-infobox').html('<a href="' + $this.data('link') + '">' +new_text+'<span class="pull-right">'+$this.data('copy')+'</span></a>');
+             if(typeof $this.data('type') !== 'undefined'  && $this.data('type') == 'veranst-archive'){
+                 var newData = $this.data('veranst');
+                 $('.veranst-slider-title-box').html('<h5>' +newData.location+'</h5>');
+                 $('.veranst-slider-date-box').html(newData.date);
+                 $('.veranst-title').html('<h3><a href="' + $this.data('link') + '">' + newData.title + '</a></h3>');
+                 $('.time').html('<div class="time"><span class="glyphicon glyphicon-time"></span> ' + newData.time + ' Uhr');
+                 $('.address').html('<span class="glyphicon glyphicon-globe"></span> ' + newData.address);
+                 
+             }else{
+                $('.gal-infobox').html('<a href="' + $this.data('link') + '">' +new_text+'<span class="pull-right">'+$this.data('copy')+'</span></a>');
+             }
             var $img = $('<img>', { src: new_src });
             var newIndex = $this.parent().index();
             var oldIndex = gal.$elem.find('.owl-item.active').index();

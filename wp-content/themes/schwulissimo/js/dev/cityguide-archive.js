@@ -11,7 +11,7 @@ jQuery(document).ready(function ($) {
     if(typeof pwhere != 'undefined'){
         setMapCenter(pwhere);
     }
-    if(typeof pwhat != 'undefined'){
+    if(typeof pwhat != 'undefined' && pwhat != ''){
         console.log(pwhat);
         showSelectedMarkers(pwhat);
     }
@@ -39,7 +39,12 @@ jQuery(document).ready(function ($) {
                     $(bounce).each(function (i, v) {
                         try {
                             arrMarkers[v].setMap(map);
-                            map.setZoom(12);
+                            marks = [];
+                            marks.push(arrMarkers[v]);
+                            for (var i = 0; i < marks.length; i++) {
+                                bounds.extend(marks[i].getPosition());
+                            }
+                            map.fitBounds(bounds);
                         } catch (e) {
                         }
                     });
