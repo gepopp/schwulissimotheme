@@ -17,9 +17,13 @@ get_header(); ?>
                     global $wp_query;
 		if ( have_posts() ) : ?>
 			<header class="page-header">
-				<h1 class="page-title"><?php echo $wp_query->found_posts . ' '; printf( esc_html__( 'Ergebnisse f&uuml;r: %s', 'schwulissimo' ),  '<span>' . get_search_query() . '</span>' ); ?></h1>
-                                <?php echo paginate_links()?>
-
+                          
+                            <h1 class="page-title"><?php echo $wp_query->found_posts . ' '; printf( esc_html__( 'Ergebnisse f&uuml;r: %s', 'schwulissimo' ),  '<span>' . get_search_query() . '</span>' ); ?></h1>
+                            <?php wp_pagenavi(); ?>
+                            <?php schwulissimo_section_headline('neue suche')?>
+                            <div id="additional-search">
+                            <?php get_search_form()?>
+                            </div>
                         </header><!-- .page-header -->
 
 			<?php
@@ -48,6 +52,9 @@ get_header(); ?>
 	</section><!-- #primary -->
     </div>
     <div class="col-sm-4 hidden-xs">
+        
+       
+        
         <?php get_sidebar(); ?>
     </div>
 </div>

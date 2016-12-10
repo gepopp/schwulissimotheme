@@ -2,9 +2,9 @@
 
 <?php 
     
-    $searchterm = $_POST['veranst-what'] != '' ? $_POST['veranst-what'] : $_GET['what'];
-    $region = $_POST['veranst-where'] != '' ? $_POST['veranst-where'] : $_GET['where'];
-    $when = $_POST['veranst-when'] != '' ? $_POST['veranst-when'] : $_GET['when'];
+    $searchterm     = isset($_POST['veranst-what']) ? $_POST['veranst-what'] : $_GET['what'];
+    $region         = isset($_POST['veranst-where']) ? $_POST['veranst-where'] : $_GET['where'];
+    $when           = isset($_POST['veranst-when']) ? $_POST['veranst-when'] : $_GET['when'];
     ?>
 
 <div class="row">

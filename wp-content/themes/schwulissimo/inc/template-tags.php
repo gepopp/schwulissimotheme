@@ -83,7 +83,7 @@
                 /* translators: used between list items, there is a space after the comma */
                 $categories_list = get_the_category_list(esc_html__(', ', 'schwulissimo'));
                 if ($categories_list && schwulissimo_categorized_blog()) {
-                    printf('<span class="cat-links">' . esc_html__('Posted in %1$s', 'schwulissimo') . '</span>', $categories_list); // WPCS: XSS OK.
+                    printf('<span class="cat-links">' . esc_html__('%1$s', 'schwulissimo') . '</span>', $categories_list); // WPCS: XSS OK.
                 }
 
                 /* translators: used between list items, there is a space after the comma */

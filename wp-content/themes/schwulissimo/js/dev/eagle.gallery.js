@@ -80,6 +80,15 @@ if (typeof Object.create !== "function") {
                                    </div>\n\
                                    </div>\n\
                                    </div>');
+                }else if(typeof slider_type !== 'undefined'  && slider_type == 'category-archive'){
+                    gal.$elem.prepend('<div class="eagle-medium-wrap">\n\
+                                   <a class="eagle-view-medium-img">\n\
+                                   <img src="'+ medium_src +'" alt=""></a>\n\
+                                   <div class="category-slider-meta-box">\n\
+                                   <div class="category-title"><h1><a href="' + link + '">' + medium_title + '</a></h1></div>\n\
+                                   </div>\n\
+                                   </div>\n\
+                                   </div>');
                 }else{
                 gal.$elem.prepend('<div class="eagle-medium-wrap"><a class="eagle-view-medium-img"><img src="'+ medium_src +'" alt=""></a><div class="gal-infobox">'+medium_title+'<span class="pull-right">'+medium_cap+'</div></div>');
                 }
@@ -235,6 +244,8 @@ if (typeof Object.create !== "function") {
                  $('.time').html('<div class="time"><span class="glyphicon glyphicon-time"></span> ' + newData.time + ' Uhr');
                  $('.address').html('<span class="glyphicon glyphicon-globe"></span> ' + newData.address);
                  
+             }else if(typeof $this.data('type') !== 'undefined'  && $this.data('type') == 'category-archive'){
+                 $('.category-title').html('<h1><a href="' + $this.data('link') + '">' + $this.data('title') + '</a></h1>');
              }else{
                 $('.gal-infobox').html('<a href="' + $this.data('link') + '">' +new_text+'<span class="pull-right">'+$this.data('copy')+'</span></a>');
              }

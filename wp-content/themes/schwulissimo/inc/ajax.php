@@ -84,21 +84,33 @@
     add_action('wp_ajax_nopriv_get_tax_bounces', 'get_tax_bounces');
     function get_tax_bounces(){
         
-            $term = str_replace('term_', '', $_POST['data']);
+       
         $args = array(
             
             'post_type' => 'post_citygiude',
             'post_status' => 'publish',
             'posts_per_page' => -1,
-            'tax_query' => array(
+            'fields' => 'ids'
+        );
+        
+        if(strpos($_POST['data'], 'term_') === 0){
+             $term = str_replace('term_', '', $_POST['data']);
+             $args[tax_query] = array(
+                'realation' => 'OR',
 		array(
 			'taxonomy' => 'cityguide_category',
 			'field'    => 'term_id',
                         'terms'    =>  array($term),
 		),
-            ),
-            'fields' => 'ids'
-        );
+            );
+        }else{
+            $args['s'] = $_POST['data'];
+        }
+        
+        
+        
+        
+        
         $query = new WP_Query($args);
         echo json_encode($query->posts);
         die();

@@ -5,19 +5,21 @@
 
 
 jQuery(document).ready(function ($) {
-
+    
+    var markers = $.parseJSON(post_info.needles);
+    var arrMarkers = {};
     pwhere = $('#cityguide-where').val();
     pwhat = $('#cityguide-what-id').val();
+    
+    /*
+    $('#cityguide-what').change(function(){
+        $('#cityguide-what-id').val($(this).val());
+    });
+    */
+    
     if(typeof pwhere != 'undefined'){
         setMapCenter(pwhere);
     }
-    if(typeof pwhat != 'undefined' && pwhat != ''){
-        console.log(pwhat);
-        showSelectedMarkers(pwhat);
-    }
-
-    var markers = $.parseJSON(post_info.needles);
-    var arrMarkers = {};
     
     /**
      * Comment
@@ -49,12 +51,7 @@ jQuery(document).ready(function ($) {
                         }
                     });
                 });
-        
-        
     }
-    
-    
-
     //trigger new map center after search field change
     $("#cityguide-where").change(function () {
         setMapCenter($(this).val());
@@ -153,5 +150,23 @@ jQuery(document).ready(function ($) {
                 }
             })(marker, i));
         }
-
+        
+        $.each(arrMarkers, function (i, v) {
+                v.setMap(null);
+        });
+        var marks = [];
+        var bounds = new google.maps.LatLngBounds();
+        $(resultMarkers).each(function (i, v) {
+                        try {
+                            arrMarkers[v.post_id].setMap(map);
+                            marks.push(arrMarkers[v.post_id]);
+                        } catch (e) { }
+                    });
+                    console.log(marks);
+                    for (var i = 0; i < marks.length; i++) {
+                                bounds.extend(marks[i].getPosition());
+                            }
+                            
+                            map.fitBounds(bounds);
+                            map.panToBounds(bounds);
 });//ready

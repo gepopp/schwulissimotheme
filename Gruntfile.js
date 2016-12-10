@@ -50,7 +50,7 @@ module.exports = function (grunt) {
             },
             my_target: {
                 files: {
-                    'wp-content/themes/schwulissimo/js/main.min.js': ['wp-content/themes/schwulissimo/js/dev/main.js'],
+                    'wp-content/themes/schwulissimo/js/main.min.js': ['wp-content/themes/schwulissimo/js/dev/bootstrap.js', 'wp-content/themes/schwulissimo/js/dev/main.js'],
                     'wp-content/themes/schwulissimo/js/cityguide-archive.min.js': ['wp-content/themes/schwulissimo/js/dev/cityguide-archive.js'],
                     'wp-content/themes/schwulissimo/js/cityguide-single.min.js': ['wp-content/themes/schwulissimo/js/dev/cityguide-single.js']
                 }

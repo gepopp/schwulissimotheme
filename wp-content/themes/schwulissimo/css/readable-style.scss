@@ -45,9 +45,12 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 
 # Administration Section
 # Footer
-# 404
+# Layout
+    # 404
+    # search
 # breadcrumbs
 # archives
+
 
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
@@ -7714,10 +7717,6 @@ hr {
   margin-bottom: 1.5em;
 }
 
-ul, ol {
-  margin: 0 0 1.5em 3em;
-}
-
 ul {
   list-style: disc;
 }
@@ -8851,7 +8850,7 @@ a[href*="mailto:?subject"] {
 }
 
 /*--------------------------------------------------------------
-# Footer
+# Layout
 --------------------------------------------------------------*/
 .error-404 .glyphicon-chevron-left {
   top: 0;
@@ -8884,6 +8883,65 @@ a[href*="mailto:?subject"] {
     font-size: 2em;
     text-align: center;
   }
+}
+
+.search-results h1.page-title {
+  color: #E73C39;
+}
+.search-results .page-header {
+  padding-bottom: 9px;
+  margin: 40px 0 20px;
+  border-bottom: none;
+}
+.search-results .wp-pagenavi a, .search-results .wp-pagenavi span {
+  text-decoration: none;
+  color: #E73C39;
+  border: 1px solid #E73C39;
+  padding: 3px 5px;
+  margin: 2px;
+}
+.search-results .wp-pagenavi {
+  clear: both;
+  padding: 15px 0 15px;
+  border-top: 1px solid #E73C39;
+  border-bottom: 1px solid #E73C39;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+.search-results h6.entry-title a {
+  font-size: 16px;
+}
+.search-results .entry-footer {
+  margin: 0;
+}
+.search-results article {
+  margin-bottom: 20px;
+}
+.search-results #additional-search {
+  position: relative;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+.search-results #additional-search label {
+  width: 100%;
+}
+.search-results #additional-search .search-field {
+  width: 100%;
+  height: 30px;
+}
+.search-results #additional-search .search-submit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  font-size: 10px;
+  background: none;
+  box-shadow: none;
+  border: none;
+  color: #e73c30;
+  font-weight: bolder;
 }
 
 /*--------------------------------------------------------------
@@ -9091,4 +9149,91 @@ ul.ui-autocomplete li {
 .veranst-archive-infobox .glyphicon {
   color: #E73C39;
   margin-right: 15px;
+}
+
+.category-slider-meta-box {
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  width: 60%;
+  border-bottom: 3px solid #E73C39;
+  background-color: #373737;
+  opacity: .75;
+  padding: 15px;
+  z-index: 8888;
+}
+.category-slider-meta-box h1 a {
+  color: white;
+  text-transform: none;
+}
+
+.preview-image-large-holder {
+  height: 485px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  position: relative;
+}
+.preview-image-large-holder img {
+  height: auto;
+  width: 100%;
+}
+@media screen and (max-width: 991px) {
+  .preview-image-large-holder img {
+    height: 100%;
+    width: auto;
+  }
+}
+@media screen and (max-width: 767px) {
+  .preview-image-large-holder img {
+    height: auto;
+    width: 100%;
+  }
+}
+.preview-image-large-holder .caption {
+  position: absolute;
+  left: 0;
+  width: 60%;
+  bottom: 30px;
+  background-color: #373737;
+  padding: 15px;
+  color: white;
+  opacity: .75;
+  border-bottom: 3px solid #E73C39;
+}
+
+h5.category-archive-sider {
+  display: inline;
+  word-wrap: break-word;
+}
+h5.category-archive-sider a {
+  color: #E73C39;
+}
+
+.red {
+  color: #E73C39;
+  margin-left: 15px;
+}
+
+h5.category-archive-list {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wp-pagenavi a, .wp-pagenavi span {
+  text-decoration: none;
+  color: #E73C39;
+  border: 1px solid #E73C39;
+  padding: 3px 5px;
+  margin: 2px;
+}
+
+.wp-pagenavi {
+  clear: both;
+  padding: 15px 0 15px;
+  border-top: 1px solid #E73C39;
+  border-bottom: 1px solid #E73C39;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
 }

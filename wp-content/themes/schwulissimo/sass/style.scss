@@ -45,9 +45,12 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 
 # Administration Section
 # Footer
-# 404
+# Layout
+    # 404
+    # search
 # breadcrumbs
 # archives
+
 
 --------------------------------------------------------------*/
 @import "variables-site/variables-site";
@@ -135,9 +138,10 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 --------------------------------------------------------------*/
 @import "footer/footer";
 /*--------------------------------------------------------------
-# Footer
+# Layout
 --------------------------------------------------------------*/
 @import "layout/404";
+@import "layout/search";
 /*--------------------------------------------------------------
 # Breadcrumbs
 --------------------------------------------------------------*/
@@ -147,3 +151,4 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 --------------------------------------------------------------*/
 @import "archives/cityguide";
 @import "archives/veranst";
+@import "archives/category";

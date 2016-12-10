@@ -37,7 +37,7 @@
                                 $get_description = '';
                             }
                             ?>
-                            <img src="<?php the_post_thumbnail_url('schwuliisimo-slider-large') ?>" data-copy="<?php echo $get_description ?>" data-link="<?php echo get_the_permalink() ?>" data-medium-img="<?php the_post_thumbnail_url('full') ?>" data-big-img="<?php the_post_thumbnail_url('full') ?>" data-title="<?php echo get_the_title() ?>" alt="">
+                            <img src="<?php the_post_thumbnail_url('schwuliisimo-slider-small') ?>" data-copy="<?php echo $get_description ?>" data-link="<?php echo get_the_permalink() ?>" data-medium-img="<?php the_post_thumbnail_url('schwuliisimo-slider-large') ?>" data-big-img="<?php the_post_thumbnail_url('full') ?>" data-title="<?php echo get_the_title() ?>" alt="">
                             <?php
                             foreach ($gallery as $image_id):
 

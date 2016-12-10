@@ -106,6 +106,11 @@
                 while ($query->have_posts()):
                     ?>
             <?php $query->the_post() ?>
+                <?php 
+                    $address = get_field('cityguide_adresse');
+                    $needles[] = array('lat' => $address['lat'], 'lng' => $address['lng'], 'post_id' => get_the_ID()); 
+                    ?>
+
                     <div class="col-xs-12 cityguides-container">
                         <div class="col-sm-4 col-xs-4">
                             <?php
@@ -149,7 +154,13 @@
 
                 <?php endwhile;
             endif; ?>
-
+        <script>
+            
+            var resultMarkers = <?php echo json_encode($needles) ?>;
+           
+            
+        </script>
+        
         <?php
             //wp_pagenavi(array( 'query' => $query ));
 

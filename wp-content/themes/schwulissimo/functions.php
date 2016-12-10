@@ -174,6 +174,7 @@ require get_template_directory() . '/inc/custom-header.php';
  */
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-tags-veranst.php';
+require get_template_directory() . '/inc/template-tags-category.php';
 
 /**
  * Custom functions that act independently of the theme templates.
@@ -262,7 +263,11 @@ add_action( 'after_setup_theme', function(){
     
 });
 function custom_excerpt_length( $length ) {
-	return 20;
+            if(is_category()){
+                return 10;
+            }
+            	return 20;
+
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
@@ -307,17 +312,6 @@ function get_cityguide_terms(){
            }
            return json_encode($what);
 }
-function schwulissimo_add_custom_types( $query ) {
-  if( is_category() || is_tag() && empty( $query->query_vars['suppress_filters'] ) ) {
-    $query->set( 'post_type', array(
-     'post', 'post_citygiude', 'schwulissimo_veranst'
-		));
-	  return $query;
-	}
-}
-add_filter( 'pre_get_posts', 'schwulissimo_add_custom_types' );
-
- 
 
 function my_acf_google_map_api( $api ){
 	
@@ -329,4 +323,17 @@ function my_acf_google_map_api( $api ){
 
 add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
 
-
+add_action('add_category_one', function(){
+    
+    
+    ob_start();
+    ?>
+<div class="row">
+    <div class="col-xs-12" style="height:300px; background: #eee;">
+        
+    </div>
+</div>
+   <?php 
+       echo ob_get_clean();
+    
+});
