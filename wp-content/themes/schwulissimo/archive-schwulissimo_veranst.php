@@ -29,10 +29,11 @@
 
     <?php 
         
-        if($when == ''){
-            $start = date('Ymd', strtotime('first day of next month'));
-            $end = date('Ymd', strtotime('last day of next month'));
-            $date = array($start, $end);
+        if($when != ''){
+            $dates = preg_split("/ - /", $when);
+            $start = date('Ymd', strtotime($dates[0]));
+            $end = date('Ymd', strtotime($dates[1]));
+            $date = array((int)$start, (int)$end);
             $compare = 'BETWEEN';
         }
         
@@ -68,7 +69,7 @@
                         )
                     );
                 }
-            
+                echo var_dump($args);
             $query = new WP_Query($args);
         ?>
     <div class="col-sm-8">
