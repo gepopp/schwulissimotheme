@@ -1,6 +1,8 @@
 <?php get_header(); ?>
 
 <?php 
+    echo var_dump($_POST);
+    
     
     $searchterm     = isset($_POST['veranst-what']) ? $_POST['veranst-what'] : $_GET['what'];
     $region         = isset($_POST['veranst-where']) ? $_POST['veranst-where'] : $_GET['where'];
@@ -26,35 +28,8 @@
     
 
     <?php 
-        if($when || $when == '' || $date == 'today'){
-            $date = date('Ymd');
-            $compare = '=';
-        }
-        if($when == 'tomorrow'){
-            $date = date_create();
-            date_modify($date, '+1 day');
-            $date = date_format($date, 'Ymd');
-            $compare = '=';
-        }
-        if($when == 'week'){
-            $start = date('Ymd');
-            $end = date('Ymd', strtotime('next Monday'));
-            $date = array($start, $end);
-            $compare = 'BETWEEN';
-        }
-        if($when == 'next-week'){
-            $start = date('Ymd', strtotime('next Monday'));
-            $end = date('Ymd', strtotime('next Monday + 1 week'));
-            $date = array($start, $end);
-            $compare = 'BETWEEN';
-        }
-        if($when == 'month'){
-            $start = date('Ymd');
-            $end = date('Ymd', strtotime('last day of this month'));
-            $date = array($start, $end);
-            $compare = 'BETWEEN';
-        }
-        if($when == 'next-month'){
+        
+        if($when == ''){
             $start = date('Ymd', strtotime('first day of next month'));
             $end = date('Ymd', strtotime('last day of next month'));
             $date = array($start, $end);

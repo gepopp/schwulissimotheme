@@ -119,14 +119,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group" id="veranst-what-container">
                                             <label for="veranst-when">Wann:</label>
-                                            <select class="form-control" name="veranst-when">
-                                                <option value="today" <?php selected($when, 'today')?> >heute</option>
-                                                <option value="tomorrow" <?php selected($when, 'tomorrow')?> >morgen</option>
-                                                <option value="week" <?php selected($when, 'week')?> >diese Woche</option>
-                                                <option value="next-week" <?php selected($when, 'next-week')?> >n&auml;chste Woche</option>
-                                                <option value="month" <?php selected($when, 'month')?> >dieser Monat</option>
-                                                <option value="next-month" <?php selected($when, 'next-month')?> >n&auml;chster Monat</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="veranst-when" name="veranst-when" placeholder="Stichwort" value="<?php echo $when ?>">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
