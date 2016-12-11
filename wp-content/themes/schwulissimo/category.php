@@ -142,7 +142,7 @@
         
         <ul class="list-unstyled">
         <?php $runner=1; while($query->have_posts()): $query->the_post();?>
-            <li><h5 class="category-archive-list"><?php the_time('d.m.Y')?> <span class="red"><?php the_title() ?></span></h5></li>
+            <li><h5 class="category-archive-list"><span class="date"><?php the_time('d.m.Y')?></span> <a href="<?php the_permalink()?>"><span class="red"><?php the_title() ?></span></a></h5></li>
             <?php if($runner == 10):?>
         </ul></div>
     <ul class="list-unstyled">

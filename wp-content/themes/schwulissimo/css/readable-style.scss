@@ -9474,7 +9474,7 @@ ul.ui-autocomplete li {
   margin-right: 15px;
 }
 
-.category-slider-meta-box {
+.category .category-slider-meta-box {
   position: absolute;
   left: 0;
   bottom: 30px;
@@ -9485,34 +9485,33 @@ ul.ui-autocomplete li {
   padding: 15px;
   z-index: 8888;
 }
-.category-slider-meta-box h1 a {
+.category .category-slider-meta-box h1 a {
   color: white;
   text-transform: none;
 }
-
-.preview-image-large-holder {
+.category .preview-image-large-holder {
   height: 485px;
   margin-bottom: 30px;
   overflow: hidden;
   position: relative;
 }
-.preview-image-large-holder img {
+.category .preview-image-large-holder img {
   height: auto;
   width: 100%;
 }
 @media screen and (max-width: 991px) {
-  .preview-image-large-holder img {
+  .category .preview-image-large-holder img {
     height: 100%;
     width: auto;
   }
 }
 @media screen and (max-width: 767px) {
-  .preview-image-large-holder img {
+  .category .preview-image-large-holder img {
     height: auto;
     width: 100%;
   }
 }
-.preview-image-large-holder .caption {
+.category .preview-image-large-holder .caption {
   position: absolute;
   left: 0;
   width: 60%;
@@ -9523,35 +9522,30 @@ ul.ui-autocomplete li {
   opacity: .75;
   border-bottom: 3px solid #E73C39;
 }
-
-h5.category-archive-sider {
+.category h5.category-archive-sider {
   display: inline;
   word-wrap: break-word;
 }
-h5.category-archive-sider a {
+.category h5.category-archive-sider a {
   color: #E73C39;
 }
-
-.red {
+.category .red {
   color: #E73C39;
   margin-left: 15px;
 }
-
-h5.category-archive-list {
+.category h5.category-archive-list {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-.wp-pagenavi a, .wp-pagenavi span {
+.category .wp-pagenavi a, .category .wp-pagenavi span {
   text-decoration: none;
   color: #E73C39;
   border: 1px solid #E73C39;
   padding: 3px 5px;
   margin: 2px;
 }
-
-.wp-pagenavi {
+.category .wp-pagenavi {
   clear: both;
   padding: 15px 0 15px;
   border-top: 1px solid #E73C39;
@@ -9559,4 +9553,8 @@ h5.category-archive-list {
   text-align: center;
   display: inline-block;
   width: 100%;
+}
+.category .date {
+  display: inline-block;
+  min-width: 70px;
 }
