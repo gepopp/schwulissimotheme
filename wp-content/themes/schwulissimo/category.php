@@ -121,12 +121,17 @@
 <?php schwulissimo_section_headline('&auml;ltere beitr&auml;ge')?>
 
     <?php 
+        
+        $paged = ( get_query_var('paged') ) ? absint(get_query_var('paged')) : 1;
+           
+        
         $args = array(
             'post_type' => 'post',
             'posts_per_page' => 20,
             'post_status' => 'publish',
-            'offset' => 9,
-            'cat' => $cat
+            'offset' => 9 + 20 * ($paged -1),
+            'cat' => $cat,
+            'paged' => $paged,
         );
             $query = new WP_Query($args);
                 if($query->have_posts()):
