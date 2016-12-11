@@ -139,37 +139,38 @@
     
     function schwulissimo_veranst_get_date_id($when = false){
         
+        
         $termine = false;
         $veranst = get_schwulissimo_veranst_meta_short(get_the_ID());
-        $addTime = 0;
-        
         $addTime = strtotime('now');
+        $endTime = 999999999999;
+       
         
-        if($when == 'tomorrow'){
-                $addTime = strtotime('tomorrow'); 
-         }
-         if($when == 'next-week'){
-                 $addTime = strtotime('next Monday');
-         }
-         if($when == 'next-month'){
-                 $addTime = strtotime('first day of next month');
-         }
-                $data = false;
-                
-                if(is_array($veranst)){
-                        foreach($veranst as $dl){
-                                foreach($dl['termine'] as $t){
-                                        $time = strtotime($t['datum'] . ' ' . $t['stunde'] . ':' . $t['minute']);
-                                    if( $time >= ( $addTime ) ){
-                                        $data['date'] = date('d.m.', $time);
-                                        $data['time'] = $t['stunde'] . ':' . $t['minute'];
-                                        $data['id'] = $dl['veranstaltungsort'][0];
-                                        break 2;
-                                    }
-                                }
+        if($when){
+        
+            $dates = preg_split("/ - /", $when);
+            $addTime =  strtotime($dates[0]);
+            $endTime =  strtotime($dates[1]) + ( 23 * 60 * 60 ) + ( 59 * 60 );
+        }
+       
+        $data = false;
+        
+        if(is_array($veranst)){
+                foreach($veranst as $dl){
+                        foreach($dl['termine'] as $t){
+                                $time = strtotime($t['datum'] . ' ' . $t['stunde'] . ':' . $t['minute']);
+                               
+                            if( $time >= $addTime  && $time <= $endTime ){
+                                
+                                $data['date'] = date('d.m.', $time);
+                                $data['time'] = $t['stunde'] . ':' . $t['minute'];
+                                $data['id'] = $dl['veranstaltungsort'][0];
+                                break 2;
                             }
-                }elseif(get_field('event_date') != ''){
-                        $data['date'] = date('d.m.', strtotime(get_field('event_date')));
-                }
-                return $data;
+                        }
+                    }
+        }elseif(get_field('event_date') != ''){
+                $data['date'] = date('d.m.', strtotime(get_field('event_date')));
+        }
+        return $data;
     }

@@ -1,9 +1,6 @@
 <?php get_header(); ?>
 
 <?php 
-    echo var_dump($_POST);
-    
-    
     $searchterm     = isset($_POST['veranst-what']) ? $_POST['veranst-what'] : $_GET['what'];
     $region         = isset($_POST['veranst-where']) ? $_POST['veranst-where'] : $_GET['where'];
     $when           = isset($_POST['veranst-when']) ? $_POST['veranst-when'] : $_GET['when'];
@@ -69,7 +66,6 @@
                         )
                     );
                 }
-                echo var_dump($args);
             $query = new WP_Query($args);
         ?>
     <div class="col-sm-8">
