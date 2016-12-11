@@ -44,7 +44,14 @@
         color: white !important;
         font-size: 1.15rem;
     }
-    
+    .passed{
+        color: #999;
+        font-size: 0.8em;
+    }
+    .date{
+        display: inline-block;
+        min-width: 60px;
+    }
 }
 .veranst-review{
     

@@ -386,8 +386,13 @@
                         <ul class="list-unstyled">
                             <?php
                             foreach ($ort['termine'] as $termin) {
-                                if (strtotime($termin['datum']) >= time()) {
-                                    echo '<li>' . $termin['datum'] . ' um: ' . $termin['stunde'] . ':' . $termin['minute'] . '</li>';
+                                
+                                $now = time();
+                                $time = strtotime($termin['datum'] . ' ' . $termin['stunde'] . ':' . $termin['minute']);
+                                if($now > $time){
+                                    echo '<li class="passed"><span class="date">' . $termin['datum'] . '</span> um: ' . $termin['stunde'] . ':' . $termin['minute'] . '</li>';
+                                }else{
+                                    echo '<li><span class="date">' . $termin['datum'] . '</span> um: ' . $termin['stunde'] . ':' . $termin['minute'] . '</li>';
                                 }
                             }
                             ?>
