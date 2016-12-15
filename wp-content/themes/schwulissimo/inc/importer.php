@@ -1594,9 +1594,9 @@ add_action('wp_ajax_importer_get_galleries', function(){
 		array(
 			
 			'before'    => array(
-				'year'  => 2010,
-				'month' => 08,
-				'day'   => 06,
+				'year'  => 2009,
+				'month' => 12,
+				'day'   => 11,
                             
 			),
 			'inclusive' => true,

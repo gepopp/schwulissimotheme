@@ -122,6 +122,7 @@ function schwulissimo_scripts() {
         wp_register_script( 'moment', get_template_directory_uri() . '/js/dev/moment.js', array('schwulissimo-main'), '2171', true );   
         wp_register_script( 'daterangepicker', get_template_directory_uri() . '/js/dev/daterangepicker.js', array('moment'), '2127', true );   
         wp_register_script( 'schwulissimo-veranst-archive', get_template_directory_uri() . '/js/dev/veranst-archive.js', array('schwulissimo-main', 'jquery', 'daterangepicker'), '20151215', true );   
+        wp_register_script( 'schwulissimo-partypics-archive', get_template_directory_uri() . '/js/archive-partypics.min.js', array('schwulissimo-main', 'jquery', 'query-ui-autocomplete'), '20151215', true );   
         
         
         wp_localize_script('schwulissimo-main', 'post_info', array('ID' => get_the_ID(), 
@@ -133,7 +134,11 @@ function schwulissimo_scripts() {
             ));
         wp_enqueue_script('schwulissimo-main');
         
-       
+       if(is_post_type_archive('post_partypics')){
+           // wp_localize_script('schwulissimo-partypics-archive', 'partypics', array('locations' => get_partypics_locations()));
+            wp_enqueue_script('schwulissimo-cityguide-archive'); 
+        }
+        
         
         if(is_singular('post_citygiude')){
             wp_enqueue_script('schwulissimo-cityguide-single'); 
@@ -186,6 +191,7 @@ require get_template_directory() . '/inc/custom-header.php';
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-tags-veranst.php';
 require get_template_directory() . '/inc/template-tags-category.php';
+require get_template_directory() . '/inc/template-tags-partypics.php';
 
 /**
  * Custom functions that act independently of the theme templates.
@@ -209,6 +215,7 @@ require get_template_directory() . '/inc/optionPages.php';
  * Load Importer
  */
 require get_template_directory() . '/inc/importer.php';
+require get_template_directory() . '/inc/importer-partypics.php';
 /**
  * Load helpers
  */
@@ -296,6 +303,7 @@ add_filter('posts_where', function ( $where ) {
 
 	return $where;
 });
+
 function get_cityguide_addr(){
         
         $sql  = 'SELECT DISTINCT meta_value FROM wp_postmeta WHERE meta_key = "cityguide_adresse"';

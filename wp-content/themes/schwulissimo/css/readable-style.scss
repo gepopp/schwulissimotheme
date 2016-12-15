@@ -48,6 +48,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 # Layout
     # 404
     # search
+    # partypics slider
 # breadcrumbs
 # archives
 
@@ -7981,6 +7982,130 @@ table {
   color: black !important;
 }
 
+.post-type-archive-post_partypics .partypics-archive-metabox .red {
+  color: #E73C39;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .white {
+  color: white;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .title-bar, .post-type-archive-post_partypics .partypics-archive-metabox .footer-bar {
+  background-color: #373737;
+  padding: 15px;
+  margin-top: 20px;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .title-bar .title-bar-date, .post-type-archive-post_partypics .partypics-archive-metabox .footer-bar .title-bar-date {
+  display: inline-block;
+  width: 80px;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .title-bar h6, .post-type-archive-post_partypics .partypics-archive-metabox .footer-bar h6 {
+  display: inline-block;
+  margin: 0;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .title-bar h6 a.partypics-archive-metabox-title, .post-type-archive-post_partypics .partypics-archive-metabox .footer-bar h6 a.partypics-archive-metabox-title {
+  color: white;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .title-bar .view-count, .post-type-archive-post_partypics .partypics-archive-metabox .footer-bar .view-count {
+  padding: 0 10px;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .image-holder {
+  padding: 0;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .main-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 100%;
+  background-position: center;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .side-images {
+  width: 30%;
+  position: relative;
+  float: right;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .footer-bar {
+  margin-top: 0;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .image-count-overlay {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: rgba(255, 255, 255, 0.75);
+  font-size: 3em;
+  color: red;
+  text-align: center;
+  vertical-align: middle;
+  line-height: normal;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .image-count-overlay span {
+  position: relative;
+  top: 30%;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox .location {
+  display: inline-block;
+  width: 25%;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox ul {
+  margin: 0;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox ul li {
+  margin: 0 10px;
+  border: 1px solid #E73C39;
+  padding: 3px 10px;
+  line-height: 1;
+}
+@media screen and (max-width: 992px) {
+  .post-type-archive-post_partypics .partypics-archive-metabox ul li {
+    margin-top: 10px;
+  }
+}
+.post-type-archive-post_partypics .partypics-archive-metabox ul a[href^="https://twitter"] {
+  margin-right: 0;
+  text-indent: 0;
+  background: none;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox ul a[href^="https://www.facebook"] {
+  margin-right: 0;
+  text-indent: 0;
+  background: none;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox ul a[href^="https://plus."] {
+  margin-right: 0;
+  text-indent: 0;
+  background: none;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox ul a[href^="mailto:?subject"] {
+  margin-right: 0;
+  text-indent: 0;
+  background: none;
+}
+.post-type-archive-post_partypics .partypics-archive-metabox ul a[href^="whatsapp"] {
+  margin-right: 0;
+  text-indent: 0;
+  background: none;
+}
+
+.post-type-archive-post_partypics .partypics-searchbar {
+  background: #373737;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+.post-type-archive-post_partypics .partypics-searchbar label {
+  color: #E73C39;
+}
+.post-type-archive-post_partypics .partypics-searchbar input, .post-type-archive-post_partypics .partypics-searchbar .form-group {
+  width: 100%;
+}
+.post-type-archive-post_partypics .partypics-searchbar .btn {
+  color: white;
+  background: #E73C39;
+  margin-top: 25px;
+  border: none;
+}
+
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
@@ -9259,6 +9384,22 @@ a[href*="mailto:?subject"] {
   border: none;
   color: #e73c30;
   font-weight: bolder;
+}
+
+.post-type-archive-post_partypics .eagle-gallery .category-slider-meta-box {
+  position: absolute;
+  bottom: 20%;
+  left: 0;
+  width: 60%;
+  background-color: #373737;
+  opacity: .8;
+  padding: 20px;
+  border-bottom: 3px solid #E73C39;
+  z-index: 8888;
+}
+.post-type-archive-post_partypics .eagle-gallery .category-slider-meta-box a {
+  opacity: 1;
+  color: white;
 }
 
 /*--------------------------------------------------------------

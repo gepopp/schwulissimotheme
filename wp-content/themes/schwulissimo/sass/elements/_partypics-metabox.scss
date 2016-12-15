@@ -1,0 +1,98 @@
+.post-type-archive-post_partypics{
+    
+    .partypics-archive-metabox{
+        
+        .red{
+            color: $color__schwulissimo_red;
+        }
+        .white{
+            color:white;
+        }
+        
+        .title-bar, .footer-bar{
+            
+            background-color: #373737;
+            padding: 15px;
+            margin-top: 20px;
+            
+            .title-bar-date{
+                display: inline-block;
+                width: 80px;
+            }
+            
+            h6{
+                display: inline-block;
+                margin: 0;
+                a.partypics-archive-metabox-title{
+                    color:white;
+                }
+            }
+            .view-count{
+                padding: 0 10px;
+            } 
+        }
+        
+        .image-holder{
+            padding: 0;
+        }
+        .main-image{
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 70%;
+            height: 100%;
+            background-position: center;
+        }
+        .side-images{
+            width: 30%;
+            position: relative;
+            float: right;
+        }
+        .footer-bar{
+            margin-top: 0;
+        }
+        .image-count-overlay{
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: rgba(255,255,255,.75);
+            font-size: 3em;
+            color: red;
+            text-align: center;
+            vertical-align: middle;
+            line-height: normal;
+            
+            span{
+               position: relative;
+               top:30%; 
+            }
+        }
+        .location{
+            display: inline-block;
+            width: 25%;
+        }
+        
+        ul{
+            margin:0;
+            li{
+                margin: 0 10px;
+                border: 1px solid $color__schwulissimo_red;
+                padding: 3px 10px;
+                line-height: 1;
+                @media screen and (max-width: 992px){
+                    margin-top: 10px;
+                }
+            }
+            a[href^="https://twitter"] {  margin-right: 0; text-indent: 0; background: none;}
+            a[href^="https://www.facebook"] {  margin-right: 0; text-indent: 0; background: none;}
+            a[href^="https://plus."] {  margin-right: 0; text-indent: 0; background: none;}
+            a[href^="mailto:?subject"] {  margin-right: 0; text-indent: 0; background: none;}
+            a[href^="whatsapp"] {  margin-right: 0; text-indent: 0; background: none;}
+        }
+        
+    }
+    
+    
+}

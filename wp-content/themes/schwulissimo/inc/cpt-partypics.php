@@ -48,6 +48,7 @@ function partypics_custom_post_type() {
 		'exclude_from_search'   => false,
 		'publicly_queryable'    => true,
 		'capability_type'       => 'page',
+                'rewrite'               => array('slug' => 'partybilder')
 	);
 	register_post_type( 'post_partypics', $args );
 
