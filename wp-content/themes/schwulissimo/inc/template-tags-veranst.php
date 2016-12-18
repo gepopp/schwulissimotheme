@@ -119,7 +119,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group" id="veranst-what-container">
                                             <label for="veranst-when">Wann:</label>
-                                            <input type="text" class="form-control" id="veranst-when" name="veranst-when" placeholder="Stichwort" value="<?php echo $when ?>">
+                                            <input type="text" class="form-control" id="veranst-when" name="veranst-when" placeholder="Zeitraum" value="<?php echo $when ?>">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">

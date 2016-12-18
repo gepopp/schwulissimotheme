@@ -121,9 +121,8 @@ function schwulissimo_scripts() {
         wp_register_script( 'schwulissimo-cityguide-archive', get_template_directory_uri() . '/js/dev/cityguide-archive.js', array('schwulissimo-main'), '20151215', true );   
         wp_register_script( 'moment', get_template_directory_uri() . '/js/dev/moment.js', array('schwulissimo-main'), '2171', true );   
         wp_register_script( 'daterangepicker', get_template_directory_uri() . '/js/dev/daterangepicker.js', array('moment'), '2127', true );   
-        wp_register_script( 'schwulissimo-veranst-archive', get_template_directory_uri() . '/js/dev/veranst-archive.js', array('schwulissimo-main', 'jquery', 'daterangepicker'), '20151215', true );   
-        wp_register_script( 'schwulissimo-partypics-archive', get_template_directory_uri() . '/js/archive-partypics.min.js', array('schwulissimo-main', 'jquery', 'query-ui-autocomplete'), '20151215', true );   
-        
+        wp_register_script( 'schwulissimo-veranst-archive', get_template_directory_uri() . '/js/archive-veranst.min.js', array('schwulissimo-main', 'daterangepicker', 'moment'), '2127', true );   
+        wp_register_script( 'schwulissimo-partypics-single', get_template_directory_uri() . '/js/single-partypics.min.js', array('schwulissimo-main'), '2127', true );   
         
         wp_localize_script('schwulissimo-main', 'post_info', array('ID' => get_the_ID(), 
             'markerIcon' => get_stylesheet_directory_uri().'/img/schwulissimo_map_icon.png',
@@ -134,15 +133,19 @@ function schwulissimo_scripts() {
             ));
         wp_enqueue_script('schwulissimo-main');
         
-       if(is_post_type_archive('post_partypics')){
-           // wp_localize_script('schwulissimo-partypics-archive', 'partypics', array('locations' => get_partypics_locations()));
-            wp_enqueue_script('schwulissimo-cityguide-archive'); 
-        }
-        
         
         if(is_singular('post_citygiude')){
             wp_enqueue_script('schwulissimo-cityguide-single'); 
         }
+        if(is_singular('post_partypics')){
+                $address = get_partypics_address();
+                if($address){
+                    wp_localize_script('schwulissimo-partypics-single', 'adr_data', $address);
+                }
+                wp_enqueue_script('schwulissimo-partypics-single');
+        }
+        
+        
         
         if(is_post_type_archive('post_citygiude')){
             wp_localize_script('schwulissimo-cityguide-archive', 'cityguide_addresses', array('unique' => get_cityguide_addr(), 'cats' => get_cityguide_terms()));
@@ -330,6 +333,20 @@ function get_cityguide_terms(){
                }
            }
            return json_encode($what);
+}
+function get_partypics_address(){
+    
+    global $post;
+    $id = $post->ID;
+    $location = get_field('field_584ea0519c356');
+    if(empty($location)){
+        $address  = get_field('field_585181af894f6');
+        return $address;
+    }else{
+        $address = get_field('field_581702c7588d1', $location[0]);
+        return $address;
+    }
+    return false;
 }
 
 function my_acf_google_map_api( $api ){

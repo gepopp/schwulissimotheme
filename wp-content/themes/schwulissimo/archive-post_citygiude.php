@@ -137,7 +137,7 @@
                             <?php the_tags('<h6>Schlagw&ouml;rter:</h6>', ', ') ?>
                         <?php echo the_terms(get_the_ID(), 'cityguide_category', '<h6>Kategorien:</h6>', ', '); ?> 
                         </div>
-            <?php if (get_field('cityguide_status') == 3): ?>
+                        <?php if (get_field('cityguide_status') == 3): ?>
                             <div class="premium-link"><a href="<?php the_permalink() ?>">
                                     <span class="glyphicon glyphicon-chevron-right"></span>
                                     <span class="glyphicon glyphicon-chevron-right"></span>
@@ -147,28 +147,14 @@
                                 <span class="glyphicon glyphicon-star"></span>
                                 <span class="glyphicon glyphicon-star"></span>
                             </div>
-            <?php endif; ?>
-
-
+                        <?php endif; ?>
                     </div>
-
                 <?php endwhile;
             endif; ?>
         <script>
-            
             var resultMarkers = <?php echo json_encode($needles) ?>;
-           
-            
         </script>
-        
         <?php
-            //wp_pagenavi(array( 'query' => $query ));
-
-
-
-
-
-
             $big = 999999999; // need an unlikely integer
 
             echo paginate_links(array(

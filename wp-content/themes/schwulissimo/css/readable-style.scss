@@ -8087,6 +8087,20 @@ table {
   background: none;
 }
 
+.partypics-location-metabox {
+  background-color: #373737;
+  padding: 15px;
+  color: white;
+}
+.partypics-location-metabox img {
+  width: 100%;
+  height: auto;
+}
+.partypics-location-metabox h3.location-title {
+  margin: 0 0 15px 0;
+  color: #E73C39;
+}
+
 .post-type-archive-post_partypics .partypics-searchbar {
   background: #373737;
   margin-top: 20px;
@@ -8104,6 +8118,20 @@ table {
   background: #E73C39;
   margin-top: 25px;
   border: none;
+}
+
+.partipics-pagination {
+  width: 100%;
+  margin: 20px 0;
+  padding: 20px;
+  border-top: 1px solid #E73C39;
+  border-bottom: 1px solid #E73C39;
+  text-align: center;
+}
+.partipics-pagination a, .partipics-pagination .page-numbers {
+  color: #E73C39;
+  border: 1px solid #E73C39;
+  padding: 5px 10px;
 }
 
 /*--------------------------------------------------------------
@@ -9012,6 +9040,18 @@ object {
 
 .gallery-caption {
   display: block;
+}
+
+.partypics-single-galery, .partypics-archive-galery {
+  margin-top: 20px;
+}
+.partypics-single-galery .gal-infobox, .partypics-archive-galery .gal-infobox {
+  display: none;
+}
+.partypics-single-galery .eagle-medium-wrap img, .partypics-archive-galery .eagle-medium-wrap img {
+  width: 100%;
+  height: auto;
+  max-height: none !important;
 }
 
 #post-image-holder {

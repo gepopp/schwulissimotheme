@@ -44,3 +44,20 @@
 .gallery-caption {
 	display: block;
 }
+.partypics-single-galery, .partypics-archive-galery{
+    
+    
+    margin-top: 20px;
+    
+    .gal-infobox{
+        display:none;
+    }
+    .eagle-medium-wrap img{
+        width: 100%;
+        height: auto;
+        max-height: none !important;
+    }
+    
+    
+    
+}

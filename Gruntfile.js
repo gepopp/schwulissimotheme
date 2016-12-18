@@ -52,7 +52,10 @@ module.exports = function (grunt) {
                 files: {
                     'wp-content/themes/schwulissimo/js/main.min.js': ['wp-content/themes/schwulissimo/js/dev/bootstrap.js', 'wp-content/themes/schwulissimo/js/dev/main.js'],
                     'wp-content/themes/schwulissimo/js/cityguide-archive.min.js': ['wp-content/themes/schwulissimo/js/dev/cityguide-archive.js'],
-                    'wp-content/themes/schwulissimo/js/cityguide-single.min.js': ['wp-content/themes/schwulissimo/js/dev/cityguide-single.js']
+                    'wp-content/themes/schwulissimo/js/cityguide-single.min.js': ['wp-content/themes/schwulissimo/js/dev/cityguide-single.js'],
+                    'wp-content/themes/schwulissimo/js/archive-partypics.min.js': ['wp-content/themes/schwulissimo/js/dev/archive-partypics.js'],
+                    'wp-content/themes/schwulissimo/js/single-partypics.min.js': ['wp-content/themes/schwulissimo/js/dev/single-partypics.js'],
+                    'wp-content/themes/schwulissimo/js/archive-veranst.min.js': ['wp-content/themes/schwulissimo/js/dev/archive-veranst.js']
                 }
             },
           

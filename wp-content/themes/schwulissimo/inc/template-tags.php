@@ -458,7 +458,7 @@
      */
     function schwulissimo_section_headline($text, $color = 'black') {
         ?>
-        <h3 style="display:table; overflow:hidden; <?php echo $color == 'red' ? 'color: #E63E3B;' : '' ?> "><span style="display:table-cell; white-space: nowrap;"><div class="grey-spacer" <?php echo $color == 'red' ? 'style="background-color: #E63E3B;"' : '' ?>></div><div style="display:inline;"><?php echo $text ?></div></span>
+        <h3 style="display:table; overflow:hidden; <?php echo $color == 'red' ? 'color: #E63E3B;' : '' ?> "><span style="display:table-cell; white-space: nowrap;"><div class="grey-spacer" <?php echo $color == 'red' ? 'style="background-color: #E63E3B;"' : '' ?>></div><div style="display:inline; <?php echo $color == 'white' ? 'color:white;':'' ?>"><?php echo $text ?></div></span>
             <span  style="display: table-cell; width: 100%; position: relative;"><div style="position:absolute;width: 100%; height: 100%; margin-left: 20px;<?php echo $color == 'red' ? 'background-image: url(' . get_stylesheet_directory_uri() . '/img/bg1x1red.png);' : '' ?>" class="grey-bottom-line" ></div></span></h3>
         <?php
     }

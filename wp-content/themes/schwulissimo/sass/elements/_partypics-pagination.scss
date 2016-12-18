@@ -1,0 +1,15 @@
+.partipics-pagination{
+    
+    width: 100%;
+    margin: 20px 0;
+    padding: 20px;
+    border-top: 1px solid $color__schwulissimo_red;
+    border-bottom: 1px solid $color__schwulissimo_red;
+    text-align: center;
+    
+    a, .page-numbers{
+        color: $color__schwulissimo_red;
+        border: 1px solid $color__schwulissimo_red;
+        padding: 5px 10px;
+    }
+}    

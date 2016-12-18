@@ -11,7 +11,7 @@
         );
             $query = new WP_Query($args);
             ?>
-                    <div class="eagle-gallery img500" style="margin-top: 20px">
+                    <div class="eagle-gallery img500 partypics-archive-galery" style="margin-top: 20px">
                         <div class="owl-carousel">
                             <?php if($query->have_posts()): while ($query->have_posts()): $query->the_post(); ?>
                             <?php 
@@ -83,17 +83,15 @@
                                 $counter = 1;
                             endif;?>
                             <div class="col-xs-12 image-holder" >
-                            
+                            <a href="<?php the_permalink()?>">
                                 <div class="main-image" style="background-image: url('<?php echo $image ?>')"></div> 
                                 <div class="side-images">
-                                    
                                     <img src="<?php echo $galery[$counter]['sizes']['schwuliisimo-detail-cols'] ?>" />
                                     <img src="<?php echo $galery[++$counter]['sizes']['schwuliisimo-detail-cols'] ?>" />
                                     <div class="image-count-overlay"><span>+ <?php echo count($galery) ?></span></div>
-                                
                                 </div>
+                            </a>   
                             </div>
-                        
                         <div class="col-xs-12 footer-bar">
                             <?php 
                                 $place = get_field('field_584ea0519c356');
@@ -156,14 +154,23 @@
     <?php 
   }
   
-  function schwulissimo_partypics_archive_searchbar(){
+  function schwulissimo_partypics_archive_searchbar($where, $what){
       ?>
         <div class="col-xs-12 partypics-searchbar">
-            <form class="form-inline" action="<?php echo get_post_type_archive_link('post_citygiude') ?>" method="post">
+            <form class="form-inline" action="<?php echo get_post_type_archive_link('post_partypics') ?>" method="post">
                 <div class="col-sm-5">
                     <div class="form-group" id="partypics-where-container">
                         <label for="partypics-where">Wo:</label>
-                        <input type="text" class="form-control" id="partypics-where" name="partypics-where" placeholder="Region" value="<?php echo $where ?>" >
+                        <select class="form-control" id="partypics-where" name="partypics-where" >
+                            <option value="a">Alle Regionen</option>
+                            <?php 
+                                $terms = get_terms(array( 'taxonomy' => 'post_region', 'hide_empty' => true,)); 
+                                foreach($terms as $term){
+                                        echo '<option value="' . $term->term_id .'"' . selected($term->term_id, $where) .  '>' . $term->name . '</option>';
+                                        
+                                }
+                                ?>
+                        </select>
                     </div>
                 </div><div class="col-sm-5">
                     <div class="form-group" id="partypics-what-container">
@@ -177,4 +184,44 @@
             </form>
         </div>
       <?php 
+  }
+  
+  function schwulissimo_partypics_single_location_metabox(){
+     
+     $location = get_field('field_584ea0519c356');
+     if(empty($location)) return false;
+     ?>
+                    <div class="col-xs-12 partypics-location-metabox">
+                        <?php // schwulissimo_section_headline('Location', 'white') ?>
+                        <?php 
+                            $logo = get_field('field_583199e7aaf58', $location[0]); 
+                            if(empty($logo)){
+                                $logo['sizes']['thumbnail'] = "https://placeholdit.imgix.net/~text?txtsize=33&txt=Kein Logo!&w=150&h=150";
+                            }
+                            
+                            ?>
+                        
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <a href="<?php echo get_the_permalink($location[0]) ?>"><img src="<?php echo $logo['sizes']['thumbnail'] ?>" /></a>
+                            </div>
+                            <div class="col-xs-9">
+                                <h3 class="location-title"><?php echo get_the_title($location[0]) ?></h3>
+                                <address>
+                                    <?php echo get_field('field_581702c7588d1', $location[0] )['address']?>
+                                </address>
+                                <p><a class="more-link" href="<?php echo get_the_permalink($location[0]) ?>">mehr...</a></p>
+                            </div>
+                        </div>
+                    </div>
+     <?php 
+ }
+ 
+  function schwulissimo_partypics_single_map(){
+      
+          $location = get_field('field_584ea0519c356');
+          $address  = get_field('field_585181af894f6');
+                  if(!empty($location) || !empty($address)){
+                      echo '<div id="partypics-single-map" style="height: 500px; width: 100%; "></div>';
+                  }
   }

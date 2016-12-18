@@ -6,8 +6,6 @@ jQuery(function($) {
     function cb(start, end) {
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
     }
-
-
     $('#veranst-when').daterangepicker({
          "locale": {
         "format": "DD.MM.YYYY",
@@ -52,7 +50,5 @@ jQuery(function($) {
         },
        
     }, cb);
-
     cb(start, end);
-    
 });
