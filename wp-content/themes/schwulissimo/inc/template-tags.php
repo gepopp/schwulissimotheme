@@ -595,9 +595,13 @@
                     <?php endwhile; ?>
                 <?php endif;
                 wp_reset_postdata();
+                
+                
+                schwulissimo_citiguide_partypics_meta();
+                
                 ?>
 
-
+                
 
                 <div class="col-xs-12">
         <?php schwulissimo_section_headline('Karte'); ?>
@@ -609,4 +613,48 @@
 
             <?php
         }
+    
         
+        function schwulissimo_citiguide_partypics_meta(){
+            
+            $args = array(
+                
+                'post_type'     => 'post_partypics',
+                'post_status'   => 'publish',
+                'meta_query'    => array(
+                    'relation'  => 'AND',
+                    array(
+                        'field'     => 'schwulissimo_partypics_cityguide_verknupfung',
+                        'value'     => get_the_ID(),
+                        'compare'   => 'LIKE'
+                    )
+                )
+            );
+                $query = new WP_Query($args);
+                $count = $query->post_count;
+                if( $count > 0 ){
+                   ?>
+                    <div class="col-xs-12">
+                  <?php 
+                      schwulissimo_section_headline('partypics'); 
+                      echo '<ul class="list-inline list-unstyled partypics-list">';
+                          while($query->have_posts()){
+                                  $query->the_post();
+                                      if(has_post_thumbnail()):
+                                  ?>
+                        <li><a href="<?php echo get_the_permalink() ?>"><?php the_post_thumbnail('thumbnail')?></a></li>
+                                  <?php else: ?>
+                        <li><a href="<?php echo get_the_permalink() ?>"><img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=Kein Titelbild!&w=150&h=150" /></a<</li>
+                                   <?php endif;
+                                  
+                          }
+                          wp_reset_postdata();
+                      echo '</ul>';
+                      
+                      ?>
+                    </div>
+            <?php 
+
+                }
+            
+        }

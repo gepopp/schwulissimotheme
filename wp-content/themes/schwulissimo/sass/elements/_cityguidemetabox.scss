@@ -41,4 +41,11 @@
         display: inline-block;
         line-height: .9;
     }
+    .partypics-list{
+        li{
+            max-width: 24%;
+            padding-left: 0;
+            padding-right: 1%;
+        }
+    }
 }
